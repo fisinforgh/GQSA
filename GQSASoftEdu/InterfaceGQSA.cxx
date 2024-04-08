@@ -22,6 +22,7 @@
 #include <TROOT.h>
 #include <iostream>
 #include <cmath>
+#include <TString.h>
 #include "InterfaceGQSA.h"
 
 MyMainFrame::MyMainFrame(const TGWindow *p,UInt_t w,UInt_t h) {
@@ -39,10 +40,10 @@ MyMainFrame::MyMainFrame(const TGWindow *p,UInt_t w,UInt_t h) {
    SimulTab = new TGTab(MainCFrame);
    CanvasTab = new TGTab(HFrame1);
    
-   SimulF = SimulTab->AddTab("Simulation");
-   SimulF->SetLayoutManager(new TGVerticalLayout(SimulF));
    ConceptF = SimulTab->AddTab("Basic Concepts");
    ConceptF->SetLayoutManager(new TGVerticalLayout(ConceptF));
+   SimulF = SimulTab->AddTab("Simulation");
+   SimulF->SetLayoutManager(new TGVerticalLayout(SimulF));
 
    StepsFrame = CanvasTab->AddTab("Steps");
    StepsFrame->SetLayoutManager(new TGHorizontalLayout(StepsFrame));
@@ -84,7 +85,6 @@ MyMainFrame::MyMainFrame(const TGWindow *p,UInt_t w,UInt_t h) {
 
    nQubits = new TGNumberEntry(SimulF);
    nQubits->SetState(kFALSE);
-
    
    TGLayoutHints *Centrar = new TGLayoutHints (kLHintsCenterX | kLHintsCenterY ,5 ,5 ,5 ,5);
    TGLayoutHints *Expandir = new TGLayoutHints (kLHintsExpandX | kLHintsExpandY ,10 ,10 ,10 ,10);
@@ -93,9 +93,20 @@ MyMainFrame::MyMainFrame(const TGWindow *p,UInt_t w,UInt_t h) {
    TGLayoutHints *ExpandirX = new TGLayoutHints (kLHintsExpandX ,0 ,10);
    TGLayoutHints *ExpandirY = new TGLayoutHints (kLHintsExpandY ,10 ,10);
 
-   TGIcon *IconUD= new TGIcon(HFrame3, "pictures/LogoUD1.png");
-   TGIcon *IFisinfor = new TGIcon(HFrame3, "pictures/logo_fisinfor.png");
-   TGIcon *GUIIcon = new TGIcon(DFrame1, "pictures/LogoGUI.png");
+   TString spathHIDEN_FILE(gSystem->HomeDirectory());
+   spathHIDEN_FILE.Append("/.pathDIR_QGSASoftEdu.txt");
+   
+   std::ifstream inHidenFile;
+   inHidenFile.open(spathHIDEN_FILE);
+   
+   std::string spathICONS;
+   getline(inHidenFile,spathICONS);
+   pathDIR_ICONS.Append(spathICONS);
+   pathDIR_ICONS.Append("/pictures/");
+   
+   TGIcon *IconUD= new TGIcon(HFrame3, pathDIR_ICONS + "LogoUD1.png");
+   TGIcon *IFisinfor = new TGIcon(HFrame3, pathDIR_ICONS + "logo_fisinfor.png");
+   TGIcon *GUIIcon = new TGIcon(DFrame1, pathDIR_ICONS + "LogoGUI.png");
 
    GFrame1->AddFrame(NEntry1,Centrar);
    GFrame2->AddFrame(NEntry2,Centrar);
@@ -168,15 +179,16 @@ MyMainFrame::MyMainFrame(const TGWindow *p,UInt_t w,UInt_t h) {
    PaveInfo->SetFillColor(kBlue-10);
    PaveInfo->SetTextSize(0.03);
    PaveInfo->AddText("The Grover's algorithm is a quantum computing");
-   PaveInfo->AddText("algorithm for the search of an element in a");
-   PaveInfo->AddText("disordered list, this algorithm has a better");
-   PaveInfo->AddText("performance than a classic one, where the");
-   PaveInfo->AddText("avarage amount of iterations needed is #alpha N.");
-   PaveInfo->AddText("While Grover's algorithm finds the desired");
+   PaveInfo->AddText("algorithm analogous to the search of an");
+   PaveInfo->AddText("element in a disordered list, this algorithm");
+   PaveInfo->AddText("shows a better performance than a classic one,");
+   PaveInfo->AddText("where the avarage amount of iterations needed is");
+   PaveInfo->AddText("#alpha N. While Grover's algorithm finds the desired");
    PaveInfo->AddText("element in #alpha#sqrt{N} iterations where N");
    PaveInfo->AddText("is the total amount of elements in the list.");
    PaveInfo->AddText("Grover's algortihm is one of the most mention");
    PaveInfo->AddText("quantum algorithms in the literature.");
+   PaveInfo->AddText("");
    PaveInfo->Draw();
 
    TPaveText *PaveT1 = new TPaveText(0.36,0.01,0.715,0.57);
