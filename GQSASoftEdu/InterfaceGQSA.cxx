@@ -23,6 +23,8 @@
 #include <iostream>
 #include <cmath>
 #include <TString.h>
+#include <TSystem.h>
+#include <Riostream.h>
 #include "InterfaceGQSA.h"
 
 MyMainFrame::MyMainFrame(const TGWindow *p,UInt_t w,UInt_t h) {
@@ -94,8 +96,8 @@ MyMainFrame::MyMainFrame(const TGWindow *p,UInt_t w,UInt_t h) {
    TGLayoutHints *ExpandirY = new TGLayoutHints (kLHintsExpandY ,10 ,10);
 
    TString spathHIDEN_FILE(gSystem->HomeDirectory());
-   spathHIDEN_FILE.Append("/.pathDIR_QGSASoftEdu.txt");
-   
+   spathHIDEN_FILE.Append("/.pathDIR_GQSASoftEdu.txt");
+
    std::ifstream inHidenFile;
    inHidenFile.open(spathHIDEN_FILE);
    
@@ -168,8 +170,8 @@ MyMainFrame::MyMainFrame(const TGWindow *p,UInt_t w,UInt_t h) {
    Welcome->AddText("In the simulation the circuit, the steps of the algorithm and matrices of the gates, the geometric visualization, and the amplitude of");
    Welcome->AddText("the states are shown. Being able to take an step by step look, and understand the progression and  changes in the algorithm as the");
    Welcome->AddText("parameters are changed.");
-   Welcome->AddText("We recommend to check first the basic concepts tab and then, for the simulation, to start with few amount of elements, and progresively increase");
-   Welcome->AddText("them in order to understand better the algorithm and the changes in it.");
+   Welcome->AddText("We recommend to check first the basic concepts tab and then, for the simulation, to start with few amount of elements, and progresively");
+   Welcome->AddText("increase them in order to understand better the algorithm and the changes in it.");
    Welcome->AddText("");
    Welcome->Draw();
    
@@ -182,8 +184,8 @@ MyMainFrame::MyMainFrame(const TGWindow *p,UInt_t w,UInt_t h) {
    PaveInfo->AddText("algorithm analogous to the search of an");
    PaveInfo->AddText("element in a disordered list, this algorithm");
    PaveInfo->AddText("shows a better performance than a classic one,");
-   PaveInfo->AddText("where the avarage amount of iterations needed is");
-   PaveInfo->AddText("#alpha N. While Grover's algorithm finds the desired");
+   PaveInfo->AddText("where the avarage amount of iterations needed");
+   PaveInfo->AddText("is #alpha N. While Grover's algorithm finds the desired");
    PaveInfo->AddText("element in #alpha#sqrt{N} iterations where N");
    PaveInfo->AddText("is the total amount of elements in the list.");
    PaveInfo->AddText("Grover's algortihm is one of the most mention");
@@ -227,7 +229,7 @@ MyMainFrame::MyMainFrame(const TGWindow *p,UInt_t w,UInt_t h) {
    pavecred->AddText(" #font[62]{Daniel M Martin R}");
    pavecred->AddText(" FISINFOR research group");
    pavecred->AddText(" #font[62]{Julian A Salamanca B}, PHD ");
-   pavecred->AddText(" FISINFOR research group leader ");
+   pavecred->AddText(" FISINFOR research group director ");
    pavecred->AddText(" SCIENCE AND EDUCATION FACULTY");
    pavecred->AddText(" Professor #font[72]{UNIVERSIDAD DISTRITAL}");
    pavecred->AddText(" #font[72]{FRANCISCO JOSE DE CALDAS}");
@@ -247,7 +249,6 @@ MyMainFrame::MyMainFrame(const TGWindow *p,UInt_t w,UInt_t h) {
    MainF->Resize();
    MainF->MapWindow();
 
-   
 }
 
 void MyMainFrame::Restart(){
@@ -255,9 +256,16 @@ void MyMainFrame::Restart(){
   fCanvas = MCanvas->GetCanvas();
   fCanvas->Clear();
 
+  n=0;
+  R=0;
+
   TButton1->SetState(kButtonUp, kTRUE);
   NEntry1->SetState(kTRUE);
   NEntry2->SetState(kTRUE);
+
+  RValue->SetNumber(R);
+  
+  nQubits->SetNumber(n);
   
   TText *t = new TText(0.5,0.97,"SE GROVER'S QUANTUM SEARCH ALGORITHM");
   t->SetTextAlign(22);
@@ -278,6 +286,8 @@ void MyMainFrame::Restart(){
   Welcome->AddText("In the simulation the circuit, the steps of the algorithm and matrices of the gates, the geometric visualization, and the amplitude of");
   Welcome->AddText("the states are shown. Being able to take an step by step look, and understand the progression and  changes in the algorithm as the");
   Welcome->AddText("parameters are changed.");
+  Welcome->AddText("We recommend to check first the basic concepts tab and then, for the simulation, to start with few amount of elements, and progresively");
+  Welcome->AddText("increase them in order to understand better the algorithm and the changes in it.");
   Welcome->AddText("");
   Welcome->Draw();
   
@@ -287,15 +297,16 @@ void MyMainFrame::Restart(){
   PaveInfo->SetFillColor(kBlue-10);
   PaveInfo->SetTextSize(0.03);
   PaveInfo->AddText("The Grover's algorithm is a quantum computing");
-  PaveInfo->AddText("algorithm for the search of an element in a");
-  PaveInfo->AddText("disordered list, this algorithm has a better");
-  PaveInfo->AddText("performance than a classic one, where the");
-  PaveInfo->AddText("avarage amount of iterations needed is #alpha N.");
-  PaveInfo->AddText("While Grover's algorithm finds the desired");
+  PaveInfo->AddText("algorithm analogous to the search of an");
+  PaveInfo->AddText("element in a disordered list, this algorithm");
+  PaveInfo->AddText("shows a better performance than a classic one,");
+  PaveInfo->AddText("where the avarage amount of iterations needed");
+  PaveInfo->AddText("is #alpha N. While Grover's algorithm finds the desired");
   PaveInfo->AddText("element in #alpha#sqrt{N} iterations where N");
   PaveInfo->AddText("is the total amount of elements in the list.");
   PaveInfo->AddText("Grover's algortihm is one of the most mention");
   PaveInfo->AddText("quantum algorithms in the literature.");
+  PaveInfo->AddText("");
   PaveInfo->Draw();
   
   TPaveText *PaveT1 = new TPaveText(0.36,0.01,0.715,0.57);
@@ -334,13 +345,13 @@ void MyMainFrame::Restart(){
   pavecred->AddText(" #font[62]{Daniel M Martin R}");
   pavecred->AddText(" FISINFOR research group");
   pavecred->AddText(" #font[62]{Julian A Salamanca B}, PHD ");
-  pavecred->AddText(" FISINFOR research group leader ");
+  pavecred->AddText(" FISINFOR research group director ");
   pavecred->AddText(" SCIENCE AND EDUCATION FACULTY");
   pavecred->AddText(" Professor #font[72]{UNIVERSIDAD DISTRITAL}");
   pavecred->AddText(" #font[72]{FRANCISCO JOSE DE CALDAS}");
   
   pavecred->Draw();
-   
+  
   fCanvas->Update();
   
   fCanvas = MCanvas2->GetCanvas();
@@ -351,8 +362,12 @@ void MyMainFrame::Restart(){
   PaveInfo->Draw();
   PaveT1->Draw();
   pavecred->Draw();
-  
   fCanvas->Update();
+  
+  next->Disconnect("Clicked()");
+  TButton1->Disconnect("Clicked()");
+  TButton1->Connect("Clicked()","MyMainFrame",this,"DoDraw()");
+  
   
 }
 
@@ -386,19 +401,14 @@ void MyMainFrame::DoDraw() {
   GV->SetTextSize(0.08);
 
   latex = new TLatex();
-  
-  
+    
   N = NEntry1->GetNumber();
   k = NEntry2->GetNumber();
   n = ceil(log2(N));
 
   R = round((sqrt(N)*TMath::Pi()/4.)-0.5);
 
-  RValue->TGNumberEntry::GetButtonUp();
-
   RValue->SetNumber(R);
-
-  nQubits->TGNumberEntry::GetButtonUp();
   
   nQubits->SetNumber(n);
   
@@ -409,7 +419,6 @@ void MyMainFrame::DoDraw() {
     
     s[i]=i+1;
   }
-  //ms[N];
 
   for(int i=0; i<=N; i++){
 
@@ -419,7 +428,6 @@ void MyMainFrame::DoDraw() {
   ms[0]=1;
   
   TMatrixT<double> State(N,1,s);
-  //State.Print();
   
   PEstados = new TGraph(N,s,ms);
   PEstados->SetFillColor(40);
@@ -796,7 +804,6 @@ void MyMainFrame::Step1(){
 
   latex = new TLatex();
 
-  ms[N];
   
   for(int i=0; i<=N; i++){
     
@@ -899,7 +906,6 @@ void MyMainFrame::Step1(){
     
     Axis1 = new TLine(0.0,0.0,0.9,0.0);
     Axis2 = new TLine(0.0,-0.9,0.0,0.85);
-    //Axis3 = new TLine(0,0,-0.316,-0.589);
     
     latex->SetTextSize(0.06);
     latex->DrawLatex(-0.07,0.89,"|#beta#GT");
@@ -1007,7 +1013,6 @@ void MyMainFrame::Step1(){
     
     Axis1 = new TLine(0.0,0.0,0.9,0.0);
     Axis2 = new TLine(0.0,-0.9,0.0,0.85);
-    //Axis3 = new TLine(0,0,-0.316,-0.589);
     
     latex->SetTextSize(0.06);
     latex->DrawLatex(-0.07,0.89,"|#beta#GT");
@@ -1129,7 +1134,6 @@ void MyMainFrame::Step1(){
     
     Axis1 = new TLine(0.0,0.0,0.9,0.0);
     Axis2 = new TLine(0.0,-0.9,0.0,0.85);
-    //Axis3 = new TLine(0,0,-0.316,-0.589);
     
     latex->SetTextSize(0.06);
     latex->DrawLatex(-0.07,0.89,"|#beta#GT");
@@ -1319,7 +1323,6 @@ void MyMainFrame::Oracle(){
   for(int i=0; i<=(N*N); i++){
     uf[i]=0.0;
     
-    //std::cout<<uf[0]<<std::endl;
   }
   
   for(int i=1; i<=N; i++){
@@ -1436,7 +1439,6 @@ void MyMainFrame::Oracle(){
     HGate->Draw();
     HGate2->Draw();
     UfGate->Draw();
-    // UfGate2->Draw();
 
     gCanvas->cd(1);
 
@@ -1460,7 +1462,6 @@ void MyMainFrame::Oracle(){
     
     Axis1 = new TLine(0.0,0.0,0.9,0.0);
     Axis2 = new TLine(0.0,-0.9,0.0,0.85);
-    //Axis3 = new TLine(0,0,-0.316,-0.589);
     
     latex->SetTextSize(0.06);
     latex->DrawLatex(-0.07,0.89,"|#beta#GT");
@@ -1551,9 +1552,7 @@ void MyMainFrame::Oracle(){
     HGate3->Draw();
     
     UfGate->Draw();
-    //UfGate2->Draw();
-    //UfGate3->Draw();
-
+  
     gCanvas->cd(1);
 
     latex->DrawLatex(0.02,0.735,"|0#GT");
@@ -1581,7 +1580,6 @@ void MyMainFrame::Oracle(){
     
     Axis1 = new TLine(0.0,0.0,0.9,0.0);
     Axis2 = new TLine(0.0,-0.9,0.0,0.85);
-    //Axis3 = new TLine(0,0,-0.316,-0.589);
     
     latex->SetTextSize(0.06);
     latex->DrawLatex(-0.07,0.89,"|#beta#GT");
@@ -1683,9 +1681,6 @@ void MyMainFrame::Oracle(){
     HGate4->Draw();
 
     UfGate->Draw();
-    //UfGate2->Draw();
-    //UfGate3->Draw();
-    //UfGate4->Draw();
 
     gCanvas->cd(1);
 
@@ -1718,7 +1713,6 @@ void MyMainFrame::Oracle(){
     
     Axis1 = new TLine(0.0,0.0,0.9,0.0);
     Axis2 = new TLine(0.0,-0.9,0.0,0.85);
-    //Axis3 = new TLine(0,0,-0.316,-0.589);
     
     latex->SetTextSize(0.06);
     latex->DrawLatex(-0.07,0.89,"|#beta#GT");
@@ -1978,7 +1972,7 @@ void MyMainFrame::Diffuser(){
   StepGates->AddText("");
   StepGates->AddText("#color[21]{   D = #lower[0.2]{#scale[6]{(}} #splitline{#splitline{-1+#frac{2}{N}}{  #frac{2}{N}}}{#splitline{#splitline{   #upoint}{#lower[-0.5]{   #upoint}}}{#splitline{#lower[-0.5]{   #upoint}}{  #frac{2}{N}}}}    #splitline{#splitline{  #frac{2}{N}}{-1+#frac{2}{N}}}{#splitline{#splitline{   #upoint}{#lower[-0.5]{   #upoint}}}{#splitline{#lower[-0.5]{   #upoint}}{  #frac{2}{N}}}}   #3dots   #splitline{#splitline{  #frac{2}{N}}{  #frac{2}{N}}}{#splitline{#splitline{   #upoint}{#lower[-0.5]{   #upoint}}}{#splitline{#lower[-0.5]{   #upoint}}{-1+#frac{2}{N}}}} #lower[0.2]{#scale[6]{)}}}");
   StepGates->AddText("");
-  StepGates->AddText("The diffusion transform perofrms an inversion over the average");
+  StepGates->AddText("The diffusion transform performs an inversion over the average");
   StepGates->AddText("incrementing the amplitude of the search element (state).");
 
   double xf;
@@ -2045,10 +2039,8 @@ void MyMainFrame::Diffuser(){
     HGate->Draw();
     HGate2->Draw();
     UfGate->Draw();
-    //UfGate2->Draw();
     
     DifGate->Draw();
-    // DifGate2->Draw();
 
     gCanvas->cd(1);
 
@@ -2074,7 +2066,6 @@ void MyMainFrame::Diffuser(){
     
     Axis1 = new TLine(0.0,0.0,0.9,0.0);
     Axis2 = new TLine(0.0,-0.9,0.0,0.85);
-    //Axis3 = new TLine(0,0,-0.316,-0.589);
     
     latex->SetTextSize(0.06);
     latex->DrawLatex(-0.07,0.89,"|#beta#GT");
@@ -2172,12 +2163,8 @@ void MyMainFrame::Diffuser(){
     HGate3->Draw();
     
     UfGate->Draw();
-    // UfGate2->Draw();
-    // UfGate3->Draw();
     
     DifGate->Draw();
-    // DifGate2->Draw();
-    // DifGate3->Draw();
 
     gCanvas->cd(1);
 
@@ -2211,7 +2198,6 @@ void MyMainFrame::Diffuser(){
     
     Axis1 = new TLine(0.0,0.0,0.9,0.0);
     Axis2 = new TLine(0.0,-0.9,0.0,0.85);
-    //Axis3 = new TLine(0,0,-0.316,-0.589);
     
     latex->SetTextSize(0.06);
     latex->DrawLatex(-0.07,0.89,"|#beta#GT");
@@ -2322,14 +2308,8 @@ void MyMainFrame::Diffuser(){
     HGate4->Draw();
 
     UfGate->Draw();
-    // UfGate2->Draw();
-    // UfGate3->Draw();
-    //UfGate4->Draw();
-
+    
     DifGate->Draw();
-    // DifGate2->Draw();
-    //DifGate3->Draw();
-    //DifGate4->Draw();
 
     gCanvas->cd(1);
 
@@ -2364,7 +2344,6 @@ void MyMainFrame::Diffuser(){
     
     Axis1 = new TLine(0.0,0.0,0.9,0.0);
     Axis2 = new TLine(0.0,-0.9,0.0,0.85);
-    //Axis3 = new TLine(0,0,-0.316,-0.589);
     
     latex->SetTextSize(0.06);
     latex->DrawLatex(-0.07,0.89,"|#beta#GT");
@@ -2554,6 +2533,7 @@ void MyMainFrame::Repeat(){
   half=0;
   previous->SetState(kButtonDisabled, kTRUE);
   next->SetState(kButtonDisabled, kTRUE);
+  TButton2->SetState(kButtonDisabled, kTRUE);
   Chrono->TurnOn();
 
   previous->Disconnect("Clicked()");
@@ -2641,7 +2621,7 @@ void MyMainFrame::AnimR(){
     StepGates->AddText("");
     StepGates->AddText("#color[21]{   D = #lower[0.2]{#scale[6]{(}} #splitline{#splitline{-1+#frac{2}{N}}{  #frac{2}{N}}}{#splitline{#splitline{   #upoint}{#lower[-0.5]{   #upoint}}}{#splitline{#lower[-0.5]{   #upoint}}{  #frac{2}{N}}}}    #splitline{#splitline{  #frac{2}{N}}{-1+#frac{2}{N}}}{#splitline{#splitline{   #upoint}{#lower[-0.5]{   #upoint}}}{#splitline{#lower[-0.5]{   #upoint}}{  #frac{2}{N}}}}   #3dots   #splitline{#splitline{  #frac{2}{N}}{  #frac{2}{N}}}{#splitline{#splitline{   #upoint}{#lower[-0.5]{   #upoint}}}{#splitline{#lower[-0.5]{   #upoint}}{-1+#frac{2}{N}}}} #lower[0.2]{#scale[6]{)}}}");
     StepGates->AddText("");
-    StepGates->AddText("The diffusion transform perofrms an inversion over the average");
+    StepGates->AddText("The diffusion transform performs an inversion over the average");
     StepGates->AddText("incrementing the amplitude of the search element (state).");
     
     
@@ -2675,8 +2655,7 @@ void MyMainFrame::AnimR(){
       DifGate->AddText("D");
       
       DifGate->Draw();
-      //DifGate2->Draw();
-
+      
       gCanvas->cd(1);
 
       DifGate->Draw();
@@ -2695,12 +2674,10 @@ void MyMainFrame::AnimR(){
       
       Axis1 = new TLine(0.0,0.0,0.9,0.0);
       Axis2 = new TLine(0.0,-0.9,0.0,0.85);
-      //Axis3 = new TLine(0,0,-0.316,-0.589);
       
       latex->SetTextSize(0.06);
       latex->DrawLatex(-0.07,0.89,"|#beta#GT");
       latex->DrawLatex(0.92,-0.02,"|#alpha#GT");
-      //latex->DrawLatex(xf+0.02,yf-0.08,"DU_{f}|#varphi#GT");
       
       Axis1->Draw();
       Axis2->Draw();
@@ -2742,8 +2719,6 @@ void MyMainFrame::AnimR(){
       DifGate->AddText("D");
       
       DifGate->Draw();
-      //DifGate2->Draw();
-      //DifGate3->Draw();
 
       gCanvas->cd(1);
       DifGate->Draw();
@@ -2761,12 +2736,10 @@ void MyMainFrame::AnimR(){
       
       Axis1 = new TLine(0.0,0.0,0.9,0.0);
       Axis2 = new TLine(0.0,-0.9,0.0,0.85);
-      //Axis3 = new TLine(0,0,-0.316,-0.589);
-      
+    
       latex->SetTextSize(0.06);
       latex->DrawLatex(-0.07,0.89,"|#beta#GT");
       latex->DrawLatex(0.92,-0.02,"|#alpha#GT");
-      //latex->DrawLatex(xf+0.02,yf-0.08,"DU_{f}|#varphi#GT");
       
       Axis1->Draw();
       Axis2->Draw();
@@ -2779,7 +2752,6 @@ void MyMainFrame::AnimR(){
       latex->SetTextSize(0.06);
       latex->DrawLatex(-0.07,0.89,"|#beta#GT");
       latex->DrawLatex(0.92,-0.02,"|#alpha#GT");
-      //latex->DrawLatex(xf+0.02,yf-0.08,"DU_{f}|#varphi#GT");
       
       Axis1->Draw();
       Axis2->Draw();
@@ -2810,10 +2782,7 @@ void MyMainFrame::AnimR(){
       DifGate->AddText("D");
             
       DifGate->Draw();
-      //DifGate2->Draw();
-      //DifGate3->Draw();
-      //DifGate4->Draw();
-
+     
       gCanvas->cd(1);
       DifGate->Draw();
       
@@ -2830,13 +2799,11 @@ void MyMainFrame::AnimR(){
       
       Axis1 = new TLine(0.0,0.0,0.9,0.0);
       Axis2 = new TLine(0.0,-0.9,0.0,0.85);
-      //Axis3 = new TLine(0,0,-0.316,-0.589);
-      
+    
       latex->SetTextSize(0.06);
       latex->DrawLatex(-0.07,0.89,"|#beta#GT");
       latex->DrawLatex(0.92,-0.02,"|#alpha#GT");
-      //latex->DrawLatex(xf,yf,"DU_{f}|#varphi#GT");
-      
+     
       Axis1->Draw();
       Axis2->Draw();
       GV->Draw();
@@ -2905,7 +2872,6 @@ void MyMainFrame::AnimR(){
       latex->SetTextSize(0.06);
       latex->DrawLatex(-0.07,0.89,"|#beta#GT");
       latex->DrawLatex(0.92,-0.02,"|#alpha#GT");
-      //latex->DrawLatex(xf,yf,"DU_{f}|#varphi#GT");
       
       Axis1->Draw();
       Axis2->Draw();
@@ -2947,7 +2913,6 @@ void MyMainFrame::AnimR(){
     for(int i=0; i<=(N*N); i++){
       uf[i]=0.0;
       
-      //std::cout<<uf[0]<<std::endl;
     }
     
     for(int i=1; i<=N; i++){
@@ -3044,7 +3009,6 @@ void MyMainFrame::AnimR(){
       UfGate->AddText("Uf");
       
       UfGate->Draw();
-      //UfGate2->Draw();
 
       gCanvas->cd(1);
       UfGate->Draw();
@@ -3062,13 +3026,11 @@ void MyMainFrame::AnimR(){
     
       Axis1 = new TLine(0.0,0.0,0.9,0.0);
       Axis2 = new TLine(0.0,-0.9,0.0,0.85);
-      //Axis3 = new TLine(0,0,-0.316,-0.589);
     
       latex->SetTextSize(0.06);
       latex->DrawLatex(-0.07,0.89,"|#beta#GT");
       latex->DrawLatex(0.92,-0.02,"|#alpha#GT");
-      //latex->DrawLatex(xf-0.03,yf-0.12,"U_{f}|#varphi#GT");
-    
+     
       Axis1->Draw();
       Axis2->Draw();
       SVector->Draw();
@@ -3116,8 +3078,6 @@ void MyMainFrame::AnimR(){
     
     
       UfGate->Draw();
-      // UfGate2->Draw();
-      // UfGate3->Draw();
 
       gCanvas->cd(1);
       UfGate->Draw();
@@ -3135,13 +3095,11 @@ void MyMainFrame::AnimR(){
       
       Axis1 = new TLine(0.0,0.0,0.9,0.0);
       Axis2 = new TLine(0.0,-0.9,0.0,0.85);
-      //Axis3 = new TLine(0,0,-0.316,-0.589);
     
       latex->SetTextSize(0.06);
       latex->DrawLatex(-0.07,0.89,"|#beta#GT");
       latex->DrawLatex(0.92,-0.02,"|#alpha#GT");
-      //latex->DrawLatex(xf-0.05,yf-0.05,"U_{f}|#varphi#GT");
-    
+     
       Axis1->Draw();
       Axis2->Draw();
       SVector->Draw();
@@ -3189,10 +3147,7 @@ void MyMainFrame::AnimR(){
       UfGate->AddText("Uf");
 
       UfGate->Draw();
-      // UfGate2->Draw();
-      //UfGate3->Draw();
-      //UfGate4->Draw();
-
+     
       gCanvas->cd(1);
       UfGate->Draw();
     
@@ -3209,13 +3164,11 @@ void MyMainFrame::AnimR(){
       
       Axis1 = new TLine(0.0,0.0,0.9,0.0);
       Axis2 = new TLine(0.0,-0.9,0.0,0.85);
-      //Axis3 = new TLine(0,0,-0.316,-0.589);
-    
+      
       latex->SetTextSize(0.06);
       latex->DrawLatex(-0.07,0.89,"|#beta#GT");
       latex->DrawLatex(0.92,-0.02,"|#alpha#GT");
-      //latex->DrawLatex(xf,yf,"U_{f}|#varphi#GT");
-    
+      
       Axis1->Draw();
       Axis2->Draw();
       SVector->Draw();
@@ -3284,8 +3237,7 @@ void MyMainFrame::AnimR(){
       latex->SetTextSize(0.06);
       latex->DrawLatex(-0.07,0.89,"|#beta#GT");
       latex->DrawLatex(0.92,-0.02,"|#alpha#GT");
-      //latex->DrawLatex(xf,yf,"U_{f}|#varphi#GT");
-    
+     
       Axis1->Draw();
       Axis2->Draw();
       SVector->Draw();
@@ -3323,6 +3275,7 @@ void MyMainFrame::AnimR(){
     Chrono->TurnOff();
     previous->SetState(kButtonUp, kTRUE);
     next->SetState(kButtonUp, kTRUE);
+    TButton2->SetState(kButtonUp, kTRUE);
   }
 }
 
