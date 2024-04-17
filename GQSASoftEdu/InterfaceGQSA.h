@@ -45,7 +45,7 @@ class MyMainFrame {
 
   double M_state[100];
   int n, N, R, k, r, half;
-  double ms[];
+  double ms[100];
   
 public:
   MyMainFrame(const TGWindow *p,UInt_t w,UInt_t h);
