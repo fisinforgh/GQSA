@@ -125,7 +125,7 @@ fi
 if [ $cont -eq 1 ]; then
     infoINS1=$(
 	echo "ROOT System install found it!"
-	echo "Please click CONTINUE to select SEQFT Installation Folder"
+	echo "Please click CONTINUE to select GQSA SoftEdu Installation Folder"
 	echo " "
 	command -v $_ROOT
 	$pathROOTEXE -q
@@ -154,7 +154,7 @@ else
 	       echo "$pathROOTCONFIG"
 	       echo "Please click CONTINUE to select installation folder"
 	    )
-    echo "$infoINS2" | (zenity --text-info --title="SEQFT install" --width=800 --height=400 --ok-label='CONTINUE' --cancel-label='Exit install')
+    echo "$infoINS2" | (zenity --text-info --title="GQSA install" --width=800 --height=400 --ok-label='CONTINUE' --cancel-label='Exit install')
     if [ $? -eq 1 ]; then
 	echo "Exit"
 	exit 2
@@ -166,7 +166,7 @@ fi
 
 dirPATH=$(zenity --file-selection   --directory --title="SEGQSA install Choose a Installation Folder" --width=400 --height=200 )
 
-(zenity --info --text="Please click CONTINUE to select Desktop Folder" --title="SEQFT install choose Desktop Folder" --ok-label='CONTINUE' --width=400 --height=200 )
+(zenity --info --text="Please click CONTINUE to select Desktop Folder" --title="GQSA install choose Desktop Folder" --ok-label='CONTINUE' --width=400 --height=200 )
 
 dirDESK=$(zenity --file-selection   --directory --title="SEGQSA install choose a Desktop Folder" --width=400 --height=200)
 
@@ -175,13 +175,13 @@ tarFILE="GQSASoftEdu.tar"
 pwd
 echo "Installation folder: $dirPATH"
 echo "Path to Desktop folder: $dirDESK"
-echo "Downloading QFT source files: ... "
+echo "Downloading GQSA source files: ... "
 
 ####FALTA CAMBIAR CUANDO SE SUBA
-echo "wget https://raw.githubusercontent.com/fisinforgh/QGSA/main/$tarFILE -P $dirPATH"
+echo "wget https://raw.githubusercontent.com/fisinforgh/GQSA/main/$tarFILE -P $dirPATH"
 echo "Wait..."
 
-(wget -O $dirPATH/$tarFILE https://raw.githubusercontent.com/fisinforgh/SEQFT/main/$tarFILE) | zenity --progress --width=400 --height=200 --auto-close \
+(wget -O $dirPATH/$tarFILE https://raw.githubusercontent.com/fisinforgh/GQSA/main/$tarFILE) | zenity --progress --width=400 --height=200 --auto-close \
 										     --title="SEGQSA Install" \
 										     --text="Downloading GQSASoftEdu... Please wait ..." \
 										     --percentage=10
@@ -212,7 +212,7 @@ fi
 #----------------------------------------------------------------------------------------------------------------------------#
 
 nameDIR="GQSASoftEdu"
-FILE="InterfaceGQSA"
+FILE="GQSA"
 
 cd $dirPATH
 
@@ -283,6 +283,11 @@ echo "Categories=Science;">> "$deskFILE"
 
 echo "Desktop file: ... "
 cat $deskFILE
+
+#Change of Permission for desktop file.
+
+chmod a+x $deskFILE 
+
 dirSRCDESK="desktop_file"
 infoDESK_FILE=$(echo "Globally executable completed, hidden bash file:"
 		echo "$homeDIR/.bash_aliases"
@@ -296,3 +301,4 @@ mv $deskFILE $dirPATH/$nameDIR/$dirSRCDESK
 (zenity --info --text="$infoDESK_FILE" --width=800 --height=400  --ok-label='Close' )
 echo "Installation COMPLETED!!!"
 exit 0
+
