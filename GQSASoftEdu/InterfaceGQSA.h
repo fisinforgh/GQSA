@@ -21,6 +21,7 @@ class TTimer;
 class TLatex;
 class TText;
 class TEllipse;
+class TGToolTip;
 
 class MyMainFrame {
   RQ_OBJECT("MyMainFrame")
@@ -41,7 +42,9 @@ class MyMainFrame {
   TColor              *GateColor, *DColor, *UFColor; 
   TCanvas             *fCanvas, *gCanvas;
   TTimer              *Chrono;
+  TGToolTip           *Tip;
   TLatex              *latex;
+  TString              pathDIR_ICONS;
 
   double M_state[100];
   int n, N, R, k, r, half;
@@ -62,3 +65,4 @@ public:
   void AnimR();
   void Measure();
 };
+
