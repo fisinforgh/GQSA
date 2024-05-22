@@ -286,6 +286,7 @@ cat $deskFILE
 
 #Change of Permission for desktop file.
 
+gio set $deskFILE metadata::trusted true
 chmod a+x $deskFILE 
 
 dirSRCDESK="desktop_file"
