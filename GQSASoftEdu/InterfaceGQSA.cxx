@@ -24,6 +24,7 @@
 #include <cmath>
 #include <TString.h>
 #include <TSystem.h>
+#include <TGToolTip.h>
 #include <Riostream.h>
 #include "InterfaceGQSA.h"
 
@@ -87,6 +88,8 @@ MyMainFrame::MyMainFrame(const TGWindow *p,UInt_t w,UInt_t h) {
 
    nQubits = new TGNumberEntry(SimulF);
    nQubits->SetState(kFALSE);
+
+   Tip = new TGToolTip(gClient->GetRoot(), SimulF, "The search element must be\npart of the number of elements", 50);
    
    TGLayoutHints *Centrar = new TGLayoutHints (kLHintsCenterX | kLHintsCenterY ,5 ,5 ,5 ,5);
    TGLayoutHints *Expandir = new TGLayoutHints (kLHintsExpandX | kLHintsExpandY ,10 ,10 ,10 ,10);
@@ -185,7 +188,7 @@ MyMainFrame::MyMainFrame(const TGWindow *p,UInt_t w,UInt_t h) {
    PaveInfo->AddText("element in a disordered list, this algorithm");
    PaveInfo->AddText("shows a better performance than a classic one,");
    PaveInfo->AddText("where the avarage amount of iterations needed");
-   PaveInfo->AddText("is #alpha N. While Grover's algorithm finds the desired");
+   PaveInfo->AddText("is #alpha N. While Grover's algorithm finds the");
    PaveInfo->AddText("element in #alpha#sqrt{N} iterations where N");
    PaveInfo->AddText("is the total amount of elements in the list.");
    PaveInfo->AddText("Grover's algortihm is one of the most mention");
@@ -253,6 +256,8 @@ MyMainFrame::MyMainFrame(const TGWindow *p,UInt_t w,UInt_t h) {
 
 void MyMainFrame::Restart(){
 
+  Tip->Hide();
+
   fCanvas = MCanvas->GetCanvas();
   fCanvas->Clear();
 
@@ -290,24 +295,24 @@ void MyMainFrame::Restart(){
   Welcome->AddText("increase them in order to understand better the algorithm and the changes in it.");
   Welcome->AddText("");
   Welcome->Draw();
-  
+
   TPaveText *PaveInfo = new TPaveText(0.01,0.01,0.35,0.57);
-  PaveInfo->SetTextAlign(13);
-  PaveInfo->SetTextFont(42);
-  PaveInfo->SetFillColor(kBlue-10);
-  PaveInfo->SetTextSize(0.03);
-  PaveInfo->AddText("The Grover's algorithm is a quantum computing");
-  PaveInfo->AddText("algorithm analogous to the search of an");
-  PaveInfo->AddText("element in a disordered list, this algorithm");
-  PaveInfo->AddText("shows a better performance than a classic one,");
-  PaveInfo->AddText("where the avarage amount of iterations needed");
-  PaveInfo->AddText("is #alpha N. While Grover's algorithm finds the desired");
-  PaveInfo->AddText("element in #alpha#sqrt{N} iterations where N");
-  PaveInfo->AddText("is the total amount of elements in the list.");
-  PaveInfo->AddText("Grover's algortihm is one of the most mention");
-  PaveInfo->AddText("quantum algorithms in the literature.");
-  PaveInfo->AddText("");
-  PaveInfo->Draw();
+   PaveInfo->SetTextAlign(13);
+   PaveInfo->SetTextFont(42);
+   PaveInfo->SetFillColor(kBlue-10);
+   PaveInfo->SetTextSize(0.03);
+   PaveInfo->AddText("The Grover's algorithm is a quantum computing");
+   PaveInfo->AddText("algorithm analogous to the search of an");
+   PaveInfo->AddText("element in a disordered list, this algorithm");
+   PaveInfo->AddText("shows a better performance than a classic one,");
+   PaveInfo->AddText("where the avarage amount of iterations needed");
+   PaveInfo->AddText("is #alpha N. While Grover's algorithm finds the");
+   PaveInfo->AddText("element in #alpha#sqrt{N} iterations where N");
+   PaveInfo->AddText("is the total amount of elements in the list.");
+   PaveInfo->AddText("Grover's algortihm is one of the most mention");
+   PaveInfo->AddText("quantum algorithms in the literature.");
+   PaveInfo->AddText("");
+   PaveInfo->Draw(); 
   
   TPaveText *PaveT1 = new TPaveText(0.36,0.01,0.715,0.57);
   PaveT1->SetTextAlign(13);
@@ -373,6 +378,8 @@ void MyMainFrame::Restart(){
 
 
 void MyMainFrame::DoDraw() {
+
+  Tip->Hide();
   
   fCanvas = MCanvas->GetCanvas();
   fCanvas->Clear();
@@ -456,8 +463,9 @@ void MyMainFrame::DoDraw() {
   
   
   if(k>N){
-    std::cout<<"Number of Elements must be greater than Search Element"<<std::endl;
     Restart();
+    Tip->SetPosition(1,-1);
+    Tip->Reset();
   }
     
   switch(n){
@@ -893,6 +901,8 @@ void MyMainFrame::Step1(){
     Circuit2->Draw();
     HGate->Draw();
     HGate2->Draw();
+
+    C->Draw();
     
     fCanvas->cd(2);
     
@@ -1000,6 +1010,8 @@ void MyMainFrame::Step1(){
     HGate->Draw();
     HGate2->Draw();
     HGate3->Draw();
+
+    C->Draw();
     
     fCanvas->cd(2);
     
@@ -1121,6 +1133,8 @@ void MyMainFrame::Step1(){
     HGate2->Draw();
     HGate3->Draw();
     HGate4->Draw();
+
+    C->Draw();
     
     fCanvas->cd(2);
     
@@ -1449,6 +1463,8 @@ void MyMainFrame::Oracle(){
     HGate->Draw();
     HGate2->Draw();
     UfGate->Draw();
+
+    C->Draw();
     
     fCanvas->cd(2);
     
@@ -1567,6 +1583,8 @@ void MyMainFrame::Oracle(){
     HGate3->Draw();
     
     UfGate->Draw();
+
+    C->Draw();
     
     fCanvas->cd(2);
     
@@ -1700,6 +1718,8 @@ void MyMainFrame::Oracle(){
     HGate4->Draw();
 
     UfGate->Draw();
+
+    C->Draw();
     
     fCanvas->cd(2);
     
@@ -1833,7 +1853,7 @@ void MyMainFrame::Oracle(){
     latex->SetTextSize(0.06);
     latex->DrawLatex(-0.07,0.89,"|#beta#GT");
     latex->DrawLatex(0.92,-0.02,"|#alpha#GT");
-    latex->DrawLatex(xf-0.1,yf-0.14,"U_{f}|#varphi#GT");
+    latex->DrawLatex(xf-0.14,yf-0.14,"U_{f}|#varphi#GT");
     
     Axis1->Draw();
     Axis2->Draw();
@@ -1844,7 +1864,7 @@ void MyMainFrame::Oracle(){
 
     latex->DrawLatex(-0.07,0.89,"|#beta#GT");
     latex->DrawLatex(0.92,-0.02,"|#alpha#GT");
-    latex->DrawLatex(xf-0.1,yf-0.14,"U_{f}|#varphi#GT");
+    latex->DrawLatex(xf-0.14,yf-0.14,"U_{f}|#varphi#GT");
     
     Axis1->Draw();
     Axis2->Draw();
@@ -2053,6 +2073,8 @@ void MyMainFrame::Diffuser(){
     HGate2->Draw();
     UfGate->Draw();
     DifGate->Draw();
+
+    C->Draw();
     
     fCanvas->cd(2);
     
@@ -2070,7 +2092,7 @@ void MyMainFrame::Diffuser(){
     latex->SetTextSize(0.06);
     latex->DrawLatex(-0.07,0.89,"|#beta#GT");
     latex->DrawLatex(0.92,-0.02,"|#alpha#GT");
-    latex->DrawLatex(xf+0.02,yf-0.08,"DU_{f}|#varphi#GT");
+    latex->DrawLatex(xf+0.04,yf-0.1,"DU_{f}|#varphi#GT");
     
     Axis1->Draw();
     Axis2->Draw();
@@ -2081,7 +2103,7 @@ void MyMainFrame::Diffuser(){
 
     latex->DrawLatex(-0.07,0.89,"|#beta#GT");
     latex->DrawLatex(0.92,-0.02,"|#alpha#GT");
-    latex->DrawLatex(xf+0.02,yf-0.08,"DU_{f}|#varphi#GT");
+    latex->DrawLatex(xf+0.04,yf-0.1,"DU_{f}|#varphi#GT");
     
     Axis1->Draw();
     Axis2->Draw();
@@ -2183,7 +2205,8 @@ void MyMainFrame::Diffuser(){
     UfGate->Draw();
  
     DifGate->Draw();
-    
+
+    C->Draw();
     
     fCanvas->cd(2);
     
@@ -2331,6 +2354,8 @@ void MyMainFrame::Diffuser(){
     UfGate->Draw();
 
     DifGate->Draw();
+
+    C->Draw();
     
     fCanvas->cd(2);
     
@@ -2477,7 +2502,7 @@ void MyMainFrame::Diffuser(){
     latex->SetTextSize(0.06);
     latex->DrawLatex(-0.07,0.89,"|#beta#GT");
     latex->DrawLatex(0.92,-0.02,"|#alpha#GT");
-    latex->DrawLatex(xf+0.01,yf-0.14,"DU_{f}|#varphi#GT");
+    latex->DrawLatex(xf-0.1,yf-0.2,"DU_{f}|#varphi#GT");
     
     Axis1->Draw();
     Axis2->Draw();
@@ -2488,7 +2513,7 @@ void MyMainFrame::Diffuser(){
 
     latex->DrawLatex(-0.07,0.89,"|#beta#GT");
     latex->DrawLatex(0.92,-0.02,"|#alpha#GT");
-    latex->DrawLatex(xf+0.01,yf-0.14,"DU_{f}|#varphi#GT");
+    latex->DrawLatex(xf-0.1,yf-0.2,"DU_{f}|#varphi#GT");
     
     Axis1->Draw();
     Axis2->Draw();
@@ -3864,6 +3889,10 @@ void MyMainFrame::DifgateDef(){
   fCanvas->Clear();
   fCanvas->Divide(3,1);
 
+  gCanvas = MCanvas2->GetCanvas();
+  gCanvas->Clear();
+  gCanvas->Divide(3,1);
+
   latex = new TLatex();
 
   TText *difusser = new TText(0.5,0.97,"DIFFUSER OPERATOR");
@@ -3936,6 +3965,70 @@ void MyMainFrame::DifgateDef(){
   
   fCanvas->Update();
 
+  gCanvas->cd(1);
+
+  difusser->Draw();
+  
+  latex->SetTextSize(0.05);
+  latex->DrawLatex(0.02,0.88,"#font[11]{The diffuser operator is defined, by Grover, in its}");
+  latex->DrawLatex(0.02,0.83,"#font[11]{matrix form, as follow:}");
+  latex->DrawLatex(0.2,0.75,"#font[11]{#color[2]{D_{ij}=#frac{2}{N}  with i#neqj} and #color[4]{D_{ii}=-1+#frac{2}{N}}}");
+  latex->DrawLatex(0.02,0.68,"#font[11]{Giving as result the matrix:}");
+  latex->DrawLatex(0.02,0.44,"#font[11]{D=}");
+  latex->SetTextSize(0.41);
+  latex->DrawLatex(0.09,0.39,"#font[11]{(}");
+  latex->DrawLatex(0.85,0.39,"#font[11]{)}");
+  latex->SetTextSize(0.05);
+  latex->DrawLatex(0.22,0.52,"#font[11]{-1+#frac{2}{N}         #frac{2}{N}       #upoint#upoint#upoint      #frac{2}{N}}");
+  latex->DrawLatex(0.225,0.46,"#font[11]{ #frac{2}{N}             -1+#frac{2}{N}      #upoint#upoint#upoint      #frac{2}{N}}");
+  latex->SetTextAngle(90);
+  latex->DrawLatex(0.27,0.40,"#font[11]{#upoint#upoint#upoint}");
+  latex->DrawLatex(0.50,0.40,"#font[11]{#upoint#upoint#upoint}");
+  latex->DrawLatex(0.81,0.40,"#font[11]{#upoint#upoint#upoint}");
+  latex->SetTextAngle(158);
+  latex->DrawLatex(0.68,0.40,"#font[11]{#upoint #upoint #upoint}");
+  latex->SetTextAngle(0);
+  latex->DrawLatex(0.20,0.35,"#font[11]{  #frac{2}{N}          #frac{2}{N}       #upoint#upoint#upoint       -1+#frac{2}{N}}");
+  latex->DrawLatex(0.02,0.13,"#font[11]{Where we can see #color[50]{only the diagonal elements are}}");
+  latex->DrawLatex(0.02,0.08,"#font[11]{#color[50]{different from the others}. Watching the matrix}");
+  latex->DrawLatex(0.02,0.03,"#font[11]{obtained, we can notice this could be rewritten}");
+
+  gCanvas->cd(2);
+  latex->DrawLatex(0.02,0.9,"#font[11]{as the sum of two matrices: #color[9]{-I+#frac{2}{N}J} where #color[50]{I is}}");
+  latex->DrawLatex(0.02,0.83,"#font[11]{#color[50]{the identity matrix and J is an all ones matrix.}}");
+  latex->DrawLatex(0.02,0.77,"#font[11]{The diffuser operator can also be rewritten as the}");
+  latex->DrawLatex(0.02,0.71,"#font[11]{operation #color[51]{H^{#otimesn}RH^{#otimesn}} or #color[51]{H^{#otimesn}(2|0#GT^{#otimesn}#LT0|^{#otimesn}-I_{n})H^{#otimesn}}}");
+  latex->DrawLatex(0.02,0.65,"#font[11]{Where #color[50]{H is the Hadamard gate} and #color[50]{R is -I except}}");
+  latex->DrawLatex(0.02,0.59,"#font[11]{#color[50]{in R_{00}=1}. We can express the matrix R as two}");
+  latex->DrawLatex(0.02,0.53,"#font[11]{different matrices #color[833]{R_{1}=-I} and #color[833]{R_{2,00}=2 and R_{2,ij}=0}}");
+  latex->DrawLatex(0.02,0.47,"#font[11]{having as a result the operation #color[51]{H^{#otimesn}R_{1}H^{#otimesn}+}}");
+  latex->DrawLatex(0.02,0.41,"#font[11]{#color[51]{H^{#otimesn}R_{2}H^{#otimesn}}. The first operation is easy, being:}");
+  latex->DrawLatex(0.02,0.35,"#font[11]{#color[51]{H^{#otimesn}}#color[833]{(-I)}#color[51]{H^{#otimesn}}=#color[51]{H^{#otimesn}(#color[2]{-}H^{#otimesn})}=#color[808]{-I} #color[50]{Since H is unitary}}");
+  latex->DrawLatex(0.02,0.29,"#font[11]{#color[50]{HH=I}. On the other hand, the second operation is}");
+  latex->DrawLatex(0.02,0.23,"#font[11]{a little bit harder, for this one we will rewrite}");
+  latex->DrawLatex(0.02,0.16,"#font[11]{the Hadamard gate as follow: #color[4]{H_{ij}=2^{-n/ 2}(-1)^{i #upoint j}}}");
+  latex->DrawLatex(0.02,0.09,"#font[11]{#color[50]{Where i #upoint j is the bitwise dot product}, which}");
+  latex->DrawLatex(0.02,0.03,"#font[11]{compares the amount of 1's the bit i shares with}");
+
+  gCanvas->cd(3);
+  
+  latex->DrawLatex(0.02,0.9,"#font[11]{the bit j, #color[50]{if this amount is odd i #upoint j=1, else it's 0.}}");
+  latex->DrawLatex(0.02,0.85,"#font[11]{In order to find this second operation we make an}");
+  latex->DrawLatex(0.02,0.8,"#font[11]{standard matrix multiplication:}");
+  latex->DrawLatex(0.02,0.71,"#font[11]{#color[51]{H^{#otimesn}}#color[833]{R_{2}}#color[51]{H^{#otimesn}}=#sum}#font[11]{#color[51]{H_{ab}}#color[833]{R_{2, bc}}#color[51]{H_{cd}}}");
+  latex->DrawLatex(0.02,0.63,"#font[11]{given the definition of #color[833]{R_{2}} we obtain:}");
+  latex->DrawLatex(0.02,0.54,"#font[11]{=#color[51]{H_{a0}}#color[833]{R_{2, 00}}#color[51]{H_{0d}}=2#frac{1}{2^{n/ 2}}(-1)^{a#upoint 0}#frac{1}{2^{n/ 2}}(-1)^{0#upoint d}}");
+  latex->DrawLatex(0.02,0.46,"#font[11]{=#frac{2}{2^{n}}}");
+  latex->DrawLatex(0.02,0.38,"#font[11]{But 2^{n}=N, so that #color[51]{H^{#otimesn}}#color[833]{R_{2}}#color[51]{H^{#otimesn}}=#color[808]{#frac{2}{N}}}");
+  latex->DrawLatex(0.02,0.31,"#font[11]{Adding up the two obtained terms we get: #color[9]{-I+#frac{2}{N}}}");
+  latex->DrawLatex(0.02,0.24,"#font[11]{which is the same operation as the diffuser gate}");
+  latex->DrawLatex(0.02,0.18,"#font[11]{#color[50]{The diffuser operator is known as an invertion}}");
+  latex->DrawLatex(0.02,0.12,"#font[11]{#color[50]{over the avarage}, this because it takes the state}");
+  latex->DrawLatex(0.02,0.06,"#font[11]{previously shift and shifts it again with a #color[50]{bigger}}");
+  latex->DrawLatex(0.02,0.01,"#font[11]{#color[50]{amplitude. Leaving the avarage unchanged.}}");
+  
+  gCanvas->Update();
+
 
 }
 
@@ -3944,10 +4037,23 @@ void MyMainFrame::RDefinition(){
   fCanvas->Clear();
   fCanvas->Divide(3,1);
 
+  gCanvas = MCanvas2->GetCanvas();
+  gCanvas->Clear();
+  gCanvas->Divide(3,1);
+  
   latex = new TLatex();
 
+  TText *rvalue = new TText(0.5,0.95,"R VALUE DEFINITION");
+  rvalue->SetTextAlign(22);
+  rvalue->SetTextColor(kBlue+2);
+  rvalue->SetTextFont(32);
+  rvalue->SetTextSize(0.07);
+  
+  
   fCanvas->cd(1);
 
+  rvalue->Draw();
+  
   latex->SetTextSize(0.05);
   latex->DrawLatex(0.02,0.9,"#font[11]{#color[50]{The #color[4]{R} value dictates the amount of times it is}}");
   latex->DrawLatex(0.02,0.87,"#font[11]{#color[50]{necessary to perform the Grover protocol} (apply}");
@@ -3958,7 +4064,7 @@ void MyMainFrame::RDefinition(){
   latex->DrawLatex(0.02,0.72,"#font[11]{#color[50]{system, representing 4 elements:}}");
   latex->DrawLatex(0.17,0.67,"#font[11]{#color[51]{|#varphi#GT}=#color[2]{r_{0}}#color[51]{|00#GT}+#color[2]{r_{0}}#color[51]{|01#GT}+#color[833]{s_{0}}#color[51]{|10#GT}+#color[2]{r_{0}}#color[51]{|11#GT}}");
   latex->DrawLatex(0.02,0.62,"#font[11]{where the amplitude #color[2]{r_{0}} #color[50]{indicates the states that are}}");
-  latex->DrawLatex(0.02,0.59,"#font[11]{#color[50]{no solution, and #color[833]{s_{0}} the ones that is} (the state the}");
+  latex->DrawLatex(0.02,0.59,"#font[11]{#color[50]{no solution, and #color[833]{s_{0}} the one that is} (the state the}");
   latex->DrawLatex(0.02,0.56,"#font[11]{algorithm is looking for). We are going to express}");
   latex->DrawLatex(0.02,0.53,"#font[11]{the Grover protocol by multiplying the U_{f} gate}");
   latex->DrawLatex(0.02,0.5,"#font[11]{by the D gate, obtaining:}");
@@ -3986,12 +4092,12 @@ void MyMainFrame::RDefinition(){
   
   latex->DrawLatex(0.02,0.95,"#font[11]{We can rewrite 1/2r_{0}-1/2s_{0} = #color[807]{r_{1}} and 3/2r_{0}+1/2s_{0}=#color[871]{s_{1}}}");
   latex->DrawLatex(0.02,0.895,"#font[11]{With the normalization constant being #frac{1}{#sqrt{3r_{1}^{2}+s_{1}^{2}}}}");
-  latex->DrawLatex(0.02,0.835,"#font[11]{#color[50]{We can rewrite it by doing the next variable change:}}");
-  latex->DrawLatex(0.02,0.8,"#font[11]{#color[434]{a_{i}}=#sqrt{3}#color[807]{r_{i}} and #color[634]{b_{i}}=#color[871]{s_{i}}. Obtaining:}");
+  latex->DrawLatex(0.02,0.835,"#font[11]{#color[50]{Thus, the previous expression can be rewritten}}");
+  latex->DrawLatex(0.02,0.8,"#font[11]{#color[50]{using the variable change:} #color[434]{a_{i}}=#sqrt{3}#color[807]{r_{i}} and #color[634]{b_{i}}=#color[871]{s_{i}}:}");
   latex->DrawLatex(0.25,0.74,"#font[11]{#frac{#color[434]{a_{1}}}{#sqrt{3}} = #frac{1}{2#sqrt{3}}#color[434]{a_{0}} - #frac{1}{2}#color[634]{b_{0}}}");
-  latex->DrawLatex(0.25,0.67,"#font[11]{b_{1} = #frac{3}{2#sqrt{3}}#color[434]{a_{0}} + #frac{1}{2}#color[634]{b_{0}}}");
+  latex->DrawLatex(0.25,0.67,"#font[11]{#color[634]{b_{1}} = #frac{3}{2#sqrt{3}}#color[434]{a_{0}} + #frac{1}{2}#color[634]{b_{0}}}");
   latex->DrawLatex(0.25,0.61,"#font[11]{#color[434]{a_{1}} = #frac{1}{2}#color[434]{a_{0}} - #frac{#sqrt{3}}{2}#color[634]{b_{0}}}");
-  latex->DrawLatex(0.25,0.55,"#font[11]{#color[634]{b_{1}} = #frac{#sqrt{3}}{2}#color[434]{a_{0}} + #frac{1}{2}#color[636]{b_{0}}}");
+  latex->DrawLatex(0.25,0.55,"#font[11]{#color[634]{b_{1}} = #frac{#sqrt{3}}{2}#color[434]{a_{0}} + #frac{1}{2}#color[634]{b_{0}}}");
   latex->DrawLatex(0.02,0.49,"#font[11]{Which we can rewrite in matrix form as:}");
   latex->SetTextSize(0.15);
   latex->DrawLatex(0.02,0.41,"#font[11]{(}");
@@ -4010,7 +4116,7 @@ void MyMainFrame::RDefinition(){
   latex->DrawLatex(0.52,0.41,"#font[11]{#color[634]{b_{0}}}");
   latex->DrawLatex(0.02,0.35,"#font[11]{#color[50]{A transformation is performed in order to obtain}}");
   latex->DrawLatex(0.02,0.32,"#font[11]{#color[50]{the new state, this transformation is a rotation one}}");
-  latex->DrawLatex(0.02,0.29,"#font[11]{as we can notice in the matrix written above.}");
+  latex->DrawLatex(0.02,0.29,"#font[11]{#color[50]{as we can notice in the matrix written above.}}");
   latex->DrawLatex(0.02,0.26,"#font[11]{The rotation matrix is defined as follow:}");
   latex->SetTextSize(0.15);
   latex->DrawLatex(0.14,0.19,"#font[11]{(}");
@@ -4030,7 +4136,7 @@ void MyMainFrame::RDefinition(){
    latex->DrawLatex(0.26 ,0.07,"#font[11]{#color[434]{ a_{1}}}");
   latex->DrawLatex(0.26,0.04,"#font[11]{#color[634]{b_{1}}}");
   latex->DrawLatex(0.35,0.055,"#font[11]{=}");
-  latex->DrawLatex(0.39,0.055,"#font[11]{R#left(#frac{#pi}{3}#right)}");
+  latex->DrawLatex(0.39,0.055,"#font[11]{T#left(#frac{#pi}{3}#right)}");
   latex->DrawLatex(0.55,0.07,"#font[11]{#color[434]{ a_{0}}}");
   latex->DrawLatex(0.55,0.04,"#font[11]{#color[634]{b_{0}}}");
 
@@ -4040,7 +4146,7 @@ void MyMainFrame::RDefinition(){
   latex->DrawLatex(0.02,0.86,"#font[11]{initial amplitudes are #color[434]{a_{0}}= #sqrt{#frac{3}{4}} = #frac{#sqrt{3}}{2} and #color[634]{b_{0}}= #sqrt{#frac{1}{4}} = #frac{1}{2}}");
   latex->DrawLatex(0.02,0.82,"#font[11]{#color[50]{In terms of the angle, the initial amplitudes are:}}");
   latex->DrawLatex(0.02,0.78,"#font[11]{#color[434]{a_{0}}=cos#left(#frac{#pi}{6}#right) and #color[634]{b_{0}}=sin#left(#frac{#pi}{6}#right)}");
-  latex->DrawLatex(0.02,0.74,"#font[11]{We can see that aour state was initially at a #frac{#pi}{6}}");
+  latex->DrawLatex(0.02,0.74,"#font[11]{We can see that our state was initially at a #frac{#pi}{6}}");
   latex->DrawLatex(0.02,0.70,"#font[11]{angle and was rotated #frac{#pi}{3}, obtaining #frac{#pi}{6} + #frac{#pi}{3} = #frac{#pi}{2}}");
   latex->DrawLatex(0.02,0.66,"#font[11]{which indicates our #color[50]{state was totally projected on}}");
   latex->DrawLatex(0.02,0.63,"#font[11]{#color[50]{the y-axis, which is the desire state}}");
@@ -4075,6 +4181,138 @@ void MyMainFrame::RDefinition(){
 
   
   fCanvas->Update();
+
+  gCanvas->cd(1);
+
+  rvalue->Draw();
+  
+  latex->SetTextSize(0.05);
+  latex->DrawLatex(0.02,0.9,"#font[11]{#color[50]{The #color[4]{R} value dictates the amount of times it is}}");
+  latex->DrawLatex(0.02,0.87,"#font[11]{#color[50]{necessary to perform the Grover protocol} (apply}");
+  latex->DrawLatex(0.02,0.84,"#font[11]{the U_{f} and D gates) #color[50]{in order to have the closer}}");
+  latex->DrawLatex(0.02,0.81,"#font[11]{#color[50]{to 1 probability of finding the desire state.}}");
+  latex->DrawLatex(0.02,0.78,"#font[11]{In order to understand how to get the #color[4]{R} value let's}");
+  latex->DrawLatex(0.02,0.75,"#font[11]{first apply the Grover algorithm to a #color[50]{2 qubit}}");
+  latex->DrawLatex(0.02,0.72,"#font[11]{#color[50]{system, representing 4 elements:}}");
+  latex->DrawLatex(0.17,0.67,"#font[11]{#color[51]{|#varphi#GT}=#color[2]{r_{0}}#color[51]{|00#GT}+#color[2]{r_{0}}#color[51]{|01#GT}+#color[833]{s_{0}}#color[51]{|10#GT}+#color[2]{r_{0}}#color[51]{|11#GT}}");
+  latex->DrawLatex(0.02,0.62,"#font[11]{where the amplitude #color[2]{r_{0}} #color[50]{indicates the states that are}}");
+  latex->DrawLatex(0.02,0.59,"#font[11]{#color[50]{no solution, and #color[833]{s_{0}} the one that is} (the state the}");
+  latex->DrawLatex(0.02,0.56,"#font[11]{algorithm is looking for). We are going to express}");
+  latex->DrawLatex(0.02,0.53,"#font[11]{the Grover protocol by multiplying the U_{f} gate}");
+  latex->DrawLatex(0.02,0.5,"#font[11]{by the D gate, obtaining:}");
+  latex->DrawLatex(0.04,0.35,"#font[11]{#color[38]{DU_{f}}=}");
+  latex->SetTextSize(0.43);
+  latex->DrawLatex(0.18,0.31,"#font[11]{(}");
+  latex->DrawLatex(0.71,0.31,"#font[11]{)}");
+  latex->SetTextSize(0.05);
+  latex->DrawLatex(0.28,0.43,"#font[11]{  -#frac{1}{2}      #frac{1}{2}       -#frac{1}{2}      #frac{1}{2}}");
+  latex->DrawLatex(0.285,0.38,"#font[11]{ #frac{1}{2}       -#frac{1}{2}       -#frac{1}{2}      #frac{1}{2}}");
+  latex->DrawLatex(0.255,0.33,"#font[11]{  #frac{1}{2}      #frac{1}{2}     #frac{1}{2}      #frac{1}{2}}");
+  latex->DrawLatex(0.23,0.28,"#font[11]{   #frac{1}{2}      #frac{1}{2}       -#frac{1}{2}       -#frac{1}{2}}");
+  latex->DrawLatex(0.02,0.21,"#font[11]{Applying this operation to the state |#varphi#GT we obtain:}");
+  latex->DrawLatex(0.02,0.09,"#font[11]{#color[38]{DU_{f}}#color[51]{|#varphi#GT}=}");
+  latex->SetTextSize(0.34);
+  latex->DrawLatex(0.2,0.045,"#font[11]{(}");
+  latex->DrawLatex(0.52,0.045,"#font[11]{)}");
+  latex->SetTextSize(0.05);
+  latex->DrawLatex(0.31,0.16,"#font[11]{1/2#color[2]{r_{0}}-1/2#color[833]{s_{0}}}");
+  latex->DrawLatex(0.31,0.11,"#font[11]{1/2#color[2]{r_{0}}-1/2#color[833]{s_{0}}}");
+  latex->DrawLatex(0.31,0.06,"#font[11]{3/2#color[2]{r_{0}}+1/2#color[833]{s_{0}}}");
+  latex->DrawLatex(0.31,0.01,"#font[11]{1/2#color[2]{r_{0}}-1/2#color[833]{s_{0}}}");
+
+  gCanvas->cd(2);
+  
+  latex->DrawLatex(0.02,0.95,"#font[11]{We can rewrite 1/2r_{0}-1/2s_{0} = #color[807]{r_{1}} and 3/2r_{0}+1/2s_{0}=#color[871]{s_{1}}}");
+  latex->DrawLatex(0.02,0.895,"#font[11]{With the normalization constant being #frac{1}{#sqrt{3r_{1}^{2}+s_{1}^{2}}}}");
+  latex->DrawLatex(0.02,0.835,"#font[11]{#color[50]{Thus, the previous expression can be rewritten}}");
+  latex->DrawLatex(0.02,0.8,"#font[11]{#color[50]{using the variable change:} #color[434]{a_{i}}=#sqrt{3}#color[807]{r_{i}} and #color[634]{b_{i}}=#color[871]{s_{i}}:}");
+  latex->DrawLatex(0.25,0.74,"#font[11]{#frac{#color[434]{a_{1}}}{#sqrt{3}} = #frac{1}{2#sqrt{3}}#color[434]{a_{0}} - #frac{1}{2}#color[634]{b_{0}}}");
+  latex->DrawLatex(0.25,0.67,"#font[11]{#color[634]{b_{1}} = #frac{3}{2#sqrt{3}}#color[434]{a_{0}} + #frac{1}{2}#color[634]{b_{0}}}");
+  latex->DrawLatex(0.25,0.61,"#font[11]{#color[434]{a_{1}} = #frac{1}{2}#color[434]{a_{0}} - #frac{#sqrt{3}}{2}#color[634]{b_{0}}}");
+  latex->DrawLatex(0.25,0.55,"#font[11]{#color[634]{b_{1}} = #frac{#sqrt{3}}{2}#color[434]{a_{0}} + #frac{1}{2}#color[634]{b_{0}}}");
+  latex->DrawLatex(0.02,0.49,"#font[11]{Which we can rewrite in matrix form as:}");
+  latex->SetTextSize(0.15);
+  latex->DrawLatex(0.02,0.41,"#font[11]{(}");
+  latex->DrawLatex(0.1,0.41,"#font[11]{)}");
+  latex->DrawLatex(0.18,0.41,"#font[11]{(}");
+  latex->DrawLatex(0.43,0.41,"#font[11]{)}");
+  latex->DrawLatex(0.48,0.41,"#font[11]{(}");
+  latex->DrawLatex(0.56,0.41,"#font[11]{)}");
+  latex->SetTextSize(0.05);
+  latex->DrawLatex(0.06,0.44,"#font[11]{#color[434]{ a_{1}}}");
+  latex->DrawLatex(0.06,0.41,"#font[11]{#color[634]{b_{1}}}");
+  latex->DrawLatex(0.15,0.42,"#font[11]{=}");
+  latex->DrawLatex(0.23,0.44,"#font[11]{0.5    -#sqrt{3}/ 2}");
+  latex->DrawLatex(0.23,0.41,"#font[11]{#sqrt{3}/ 2    0.5}");
+  latex->DrawLatex(0.52,0.44,"#font[11]{#color[434]{ a_{0}}}");
+  latex->DrawLatex(0.52,0.41,"#font[11]{#color[634]{b_{0}}}");
+  latex->DrawLatex(0.02,0.35,"#font[11]{#color[50]{A transformation is performed in order to obtain}}");
+  latex->DrawLatex(0.02,0.32,"#font[11]{#color[50]{the new state, this transformation is a rotation one}}");
+  latex->DrawLatex(0.02,0.29,"#font[11]{#color[50]{as we can notice in the matrix written above.}}");
+  latex->DrawLatex(0.02,0.26,"#font[11]{The rotation matrix is defined as follow:}");
+  latex->SetTextSize(0.15);
+  latex->DrawLatex(0.14,0.19,"#font[11]{(}");
+  latex->DrawLatex(0.47,0.19,"#font[11]{)}");
+  latex->SetTextSize(0.05);
+  latex->DrawLatex(0.02,0.205,"#font[11]{T(#theta)=}");
+  latex->DrawLatex(0.18,0.22,"#font[11]{cos(#theta)     -sin(#theta)}");
+  latex->DrawLatex(0.18,0.19,"#font[11]{sin(#theta)     cos(#theta)}");
+  latex->DrawLatex(0.02,0.14,"#font[11]{We can rewrite the performed transformation in}");
+  latex->DrawLatex(0.02,0.11,"#font[11]{terms of the rotation matrix, as follows:}");
+  latex->SetTextSize(0.15);
+  latex->DrawLatex(0.22,0.04,"#font[11]{(}");
+  latex->DrawLatex(0.3,0.04,"#font[11]{)}");;
+  latex->DrawLatex(0.51,0.04,"#font[11]{(}");
+  latex->DrawLatex(0.59,0.04,"#font[11]{)}");
+  latex->SetTextSize(0.05);
+   latex->DrawLatex(0.26 ,0.07,"#font[11]{#color[434]{ a_{1}}}");
+  latex->DrawLatex(0.26,0.04,"#font[11]{#color[634]{b_{1}}}");
+  latex->DrawLatex(0.35,0.055,"#font[11]{=}");
+  latex->DrawLatex(0.39,0.055,"#font[11]{T#left(#frac{#pi}{3}#right)}");
+  latex->DrawLatex(0.55,0.07,"#font[11]{#color[434]{ a_{0}}}");
+  latex->DrawLatex(0.55,0.04,"#font[11]{#color[634]{b_{0}}}");
+
+  gCanvas->cd(3);
+  latex->DrawLatex(0.02,0.95,"#font[11]{In this example our state consist of 3 non-solution}");
+  latex->DrawLatex(0.02,0.91,"#font[11]{states and one that is solution, in order that the}");
+  latex->DrawLatex(0.02,0.86,"#font[11]{initial amplitudes are #color[434]{a_{0}}= #sqrt{#frac{3}{4}} = #frac{#sqrt{3}}{2} and #color[634]{b_{0}}= #sqrt{#frac{1}{4}} = #frac{1}{2}}");
+  latex->DrawLatex(0.02,0.82,"#font[11]{#color[50]{In terms of the angle, the initial amplitudes are:}}");
+  latex->DrawLatex(0.02,0.78,"#font[11]{#color[434]{a_{0}}=cos#left(#frac{#pi}{6}#right) and #color[634]{b_{0}}=sin#left(#frac{#pi}{6}#right)}");
+  latex->DrawLatex(0.02,0.74,"#font[11]{We can see that our state was initially at a #frac{#pi}{6}}");
+  latex->DrawLatex(0.02,0.70,"#font[11]{angle and was rotated #frac{#pi}{3}, obtaining #frac{#pi}{6} + #frac{#pi}{3} = #frac{#pi}{2}}");
+  latex->DrawLatex(0.02,0.66,"#font[11]{which indicates our #color[50]{state was totally projected on}}");
+  latex->DrawLatex(0.02,0.63,"#font[11]{#color[50]{the y-axis, which is the desire state}}");
+
+  Axis1 = new TLine(0.0,0.4,0.7,0.4);
+  Axis2 = new TLine(0.0,0.4,0.0,0.60);
+  SVector = new TArrow(0.0,0.4,0.6,0.55,0.015,"|>");
+  SVector->SetFillColor(2);
+  SVector->SetLineColor(2);
+  SVector2 = new TArrow(0.0,0.4,0.42,0.61,0.015,"|>");
+  SVector2->SetFillColor(4);
+  SVector2->SetLineColor(4);
+  Axis1->Draw();
+  Axis2->Draw();
+  SVector->Draw();
+  SVector2->Draw();
+
+  latex->DrawLatex(0.25,0.415,"#font[11]{#frac{#theta}{2}}");
+  latex->DrawLatex(0.16,0.45,"#font[11]{#theta}");
+
+  latex->DrawLatex(0.02,0.36,"#font[11]{As shown, and in general, #color[50]{the initial state}}");
+  latex->DrawLatex(0.02,0.33,"#font[11]{#color[50]{begins with an angle of #theta/2 and its rotated}}");
+  latex->DrawLatex(0.02,0.30,"#font[11]{#color[50]{an angle #theta, this means that for every application}}");
+  latex->DrawLatex(0.02,0.27,"#font[11]{#color[50]{of the Grover protocol the state will be rotated an}}");
+  latex->DrawLatex(0.02,0.24,"#font[11]{#color[50]{amount of #theta}, we want to find the (#color[4]{R}) times needed}");
+  latex->DrawLatex(0.02,0.20,"#font[11]{to rotate the state until #frac{#pi}{2}}");
+  latex->DrawLatex(0.02,0.16,"#font[11]{#color[4]{R}#theta + #frac{#theta}{2} = #frac{#pi}{2}  By the approximation sin#theta #approx #theta}");
+  latex->DrawLatex(0.02,0.12,"#font[11]{we can reeplace theta by the initial amplitude}");
+  latex->DrawLatex(0.02,0.08,"#font[11]{#color[4]{R} #frac{2}{#sqrt{N}} + #frac{1}{#sqrt{N}} #approx #frac{#pi}{2}}");
+  latex->DrawLatex(0.02,0.02,"#font[11]{#color[4]{R} #approx #frac{#pi}{4}#sqrt{N} - #frac{1}{2}}");
+  latex->DrawLatex(0.02,0.04,"#font[11]{}");
+
+  
+  gCanvas->Update();
 }
 
 MyMainFrame::~MyMainFrame() {
