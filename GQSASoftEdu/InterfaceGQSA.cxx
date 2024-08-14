@@ -168,7 +168,7 @@ MyMainFrame::MyMainFrame(const TGWindow *p,UInt_t w,UInt_t h) {
    Welcome->SetTextSize(0.03);
    Welcome->AddText("Welcome to the GQSA software of education, this is a Graphical User Interface (GUI) for the teaching and learning of Grover's Algorithm,");
    Welcome->AddText("in this GUI you will have a deep look into the algorithm getting to know in detail different information concerning the algorithm,");
-    Welcome->AddText("including: the gates construction, the R value and definition; aswell you would find a simulation section, in which it is possible to");
+   Welcome->AddText("including: the gates construction, the R value and definition; aswell you would find a simulation section, in which it is possible to");
    Welcome->AddText(" visualize the algorithm step by step and watch the evolution of the states.");
    Welcome->AddText("In the simulation the circuit, the steps of the algorithm and matrices of the gates, the geometric visualization, and the amplitude of");
    Welcome->AddText("the states are shown. Being able to take a step by step look, and understand the progression and  changes in the algorithm as the");
@@ -3808,14 +3808,14 @@ void MyMainFrame::GateConstruct(){
   latex->DrawLatex(0.02,0.78,"#font[10]{#color[50]{is equivalent} to the operation #color[51]{I-2|#color[4]{K}#GT#LT#color[4]{K}|}}");
   latex->DrawLatex(0.20,0.69,"#font[10]{#color[51]{(I-2|#color[4]{K}#GT#LT#color[4]{K}|)} |#varphi#GT=I|#varphi#GT-2|#color[4]{K}#GT#LT#color[4]{K}|#varphi#GT}");
   latex->DrawLatex(0.02,0.61,"#font[10]{where #LTk|#varphi#GT is #color[50]{the inside product}, which is}");
- latex->DrawLatex(0.02,0.56,"#font[10]{equal to 0 if #varphi#neq#color[4]{K} an 1 if #varphi=#color[4]{K}}");
- latex->DrawLatex(0.02,0.51,"#font[10]{Let's rewrite the |#varphi#GT state as |#phi#GT+|#color[4]{K}#GT}");
+  latex->DrawLatex(0.02,0.56,"#font[10]{equal to 0 if #varphi#neq#color[4]{K} an 1 if #varphi=#color[4]{K}}");
+  latex->DrawLatex(0.02,0.51,"#font[10]{Let's rewrite the |#varphi#GT state as |#phi#GT+|#color[4]{K}#GT}");
   latex->DrawLatex(0.20,0.42,"#font[10]{=I(|#phi#GT+|#color[4]{K}#GT)-2|#color[4]{K}#GT#LT#color[4]{K}|(|#phi#GT+|#color[4]{K}#GT)}");
   latex->DrawLatex(0.20,0.34,"#font[10]{=(|#phi#GT+|#color[4]{K}#GT)-2|#color[4]{K}#GT(#LT#color[4]{K}|#phi#GT+#LT#color[4]{K}|#color[4]{K}#GT)}");
   latex->DrawLatex(0.20,0.26,"#font[10]{=(|#phi#GT+|#color[4]{K}#GT)-2|#color[4]{K}#GT}");
   latex->DrawLatex(0.20,0.18,"#font[10]{=|#phi#GT#color[2]{-}|#color[4]{K}#GT}");
   latex->DrawLatex(0.02,0.11,"#font[10]{We can see that the |#color[4]{K}#GT state sign was}");
-   latex->DrawLatex(0.02,0.06,"#font[11]{flipped}");
+  latex->DrawLatex(0.02,0.06,"#font[11]{flipped}");
   
   fCanvas->Update();
 
@@ -3844,7 +3844,7 @@ void MyMainFrame::GateConstruct(){
   latex->DrawLatex(0.02,0.75,"#font[11]{|#varphi#GT=#frac{1}{#sqrt{N}}(a|00#upoint#upoint#upoint 0#GT + b|00#upoint#upoint#upoint 1#GT + #upoint#upoint#upoint}");
   latex->DrawLatex(0.02,0.66,"#font[11]{+i|#color[4]{K}#GT + #upoint#upoint#upoint + v|11#upoint#upoint#upoint 1#GT)}");
   latex->DrawLatex(0.02,0.58,"#font[11]{Applying the U_{f} gate, to the state, gives as}");
-   latex->DrawLatex(0.02,0.53,"#font[11]{a result:}");
+  latex->DrawLatex(0.02,0.53,"#font[11]{a result:}");
   latex->DrawLatex(0.02,0.46,"#font[11]{(-1)^{f(x)}|#varphi#GT=#frac{1}{#sqrt{N}}(a|00#upoint#upoint#upoint 0#GT + b|00#upoint#upoint#upoint 1#GT +}");
   latex->DrawLatex(0.02,0.37,"#font[11]{#upoint#upoint#upoint #color[2]{-}i|#color[4]{K}#GT + #upoint#upoint#upoint + v|11#upoint#upoint#upoint 1#GT)}");
   latex->DrawLatex(0.02,0.30, "#font[11]{The gate can be written in the matrix form as:}");
@@ -3871,8 +3871,8 @@ void MyMainFrame::GateConstruct(){
   latex->DrawLatex(0.02,0.78,"#font[10]{#color[50]{is equivalent} to the operation #color[51]{I-2|#color[4]{K}#GT#LT#color[4]{K}|}}");
   latex->DrawLatex(0.20,0.69,"#font[10]{#color[51]{(I-2|#color[4]{K}#GT#LT#color[4]{K}|)} |#varphi#GT=I|#varphi#GT-2|#color[4]{K}#GT#LT#color[4]{K}|#varphi#GT}");
   latex->DrawLatex(0.02,0.61,"#font[10]{where #LTk|#varphi#GT is #color[50]{the inside product}, which is}");
- latex->DrawLatex(0.02,0.56,"#font[10]{equal to 0 if #varphi#neq#color[4]{K} an 1 if #varphi=#color[4]{K}}");
- latex->DrawLatex(0.02,0.51,"#font[10]{Let's rewrite the |#varphi#GT state as |#phi#GT+|#color[4]{K}#GT}");
+  latex->DrawLatex(0.02,0.56,"#font[10]{equal to 0 if #varphi#neq#color[4]{K} an 1 if #varphi=#color[4]{K}}");
+  latex->DrawLatex(0.02,0.51,"#font[10]{Let's rewrite the |#varphi#GT state as |#phi#GT+|#color[4]{K}#GT}");
   latex->DrawLatex(0.20,0.42,"#font[10]{=I(|#phi#GT+|#color[4]{K}#GT)-2|#color[4]{K}#GT#LT#color[4]{K}|(|#phi#GT+|#color[4]{K}#GT)}");
   latex->DrawLatex(0.20,0.34,"#font[10]{=(|#phi#GT+|#color[4]{K}#GT)-2|#color[4]{K}#GT(#LT#color[4]{K}|#phi#GT+#LT#color[4]{K}|#color[4]{K}#GT)}");
   latex->DrawLatex(0.20,0.26,"#font[10]{=(|#phi#GT+|#color[4]{K}#GT)-2|#color[4]{K}#GT}");
