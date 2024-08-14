@@ -169,11 +169,11 @@ MyMainFrame::MyMainFrame(const TGWindow *p,UInt_t w,UInt_t h) {
    Welcome->AddText("Welcome to the GQSA software of education, this is a Graphical User Interface (GUI) for the teaching and learning of Grover's Algorithm,");
    Welcome->AddText("in this GUI you will have a deep look into the algorithm getting to know in detail different information concerning the algorithm,");
     Welcome->AddText("including: the gates construction, the R value and definition; aswell you would find a simulation section, in which it is possible to");
-   Welcome->AddText(" visualize the algorithm step by step and watch the volution of the states.");
+   Welcome->AddText(" visualize the algorithm step by step and watch the evolution of the states.");
    Welcome->AddText("In the simulation the circuit, the steps of the algorithm and matrices of the gates, the geometric visualization, and the amplitude of");
-   Welcome->AddText("the states are shown. Being able to take an step by step look, and understand the progression and  changes in the algorithm as the");
+   Welcome->AddText("the states are shown. Being able to take a step by step look, and understand the progression and  changes in the algorithm as the");
    Welcome->AddText("parameters are changed.");
-   Welcome->AddText("We recommend to check first the basic concepts tab and then, for the simulation, to start with few amount of elements, and progresively");
+   Welcome->AddText("We recommend to check first the basic concepts tab and then, for the simulation, to start with few amount of elements, and progressively");
    Welcome->AddText("increase them in order to understand better the algorithm and the changes in it.");
    Welcome->AddText("");
    Welcome->Draw();
@@ -191,7 +191,7 @@ MyMainFrame::MyMainFrame(const TGWindow *p,UInt_t w,UInt_t h) {
    PaveInfo->AddText("is #alpha N. While Grover's algorithm finds the");
    PaveInfo->AddText("element in #alpha#sqrt{N} iterations where N");
    PaveInfo->AddText("is the total amount of elements in the list.");
-   PaveInfo->AddText("Grover's algortihm is one of the most mention");
+   PaveInfo->AddText("Grover's algortihm is one of the most mentioned");
    PaveInfo->AddText("quantum algorithms in the literature.");
    PaveInfo->AddText("");
    PaveInfo->Draw();
@@ -202,19 +202,19 @@ MyMainFrame::MyMainFrame(const TGWindow *p,UInt_t w,UInt_t h) {
    PaveT1->SetTextSize(0.03);
    PaveT1->SetTextColor(0);
    PaveT1->SetFillColor(kAzure+1);
-   PaveT1->AddText("On the left you will find two tabs, the first one for");
-   PaveT1->AddText("the simulation of the algorithm, this contains number");
-   PaveT1->AddText("entries, which you can interact with, these belong to");
-   PaveT1->AddText("the number of elements (N) to search and the search");
-   PaveT1->AddText("element, both of those can be changed as the user need,");
-   PaveT1->AddText("it below them, there is the R value and the number of");
-   PaveT1->AddText("qubits (n), these values will be update when the");
+   PaveT1->AddText("On the left you will find two tabs, one for the");
+   PaveT1->AddText("simulation of the algorithm, this contains numerical");
+   PaveT1->AddText("entries, which you can interact with, these are for");
+   PaveT1->AddText("the number of elements (N) and the search");
+   PaveT1->AddText("element, both of those can be changed as the user need");
+   PaveT1->AddText("it, below them, there is the R value and the number of");
+   PaveT1->AddText("qubits (n), these values will be updated when the");
    PaveT1->AddText("simulation begins. On the other tab you will find");
-   PaveT1->AddText("explanations of important concepts for the algorithm");
-   PaveT1->AddText("At the bottom you will find 5 buttons: the Start use to");
-   PaveT1->AddText("begin the simulation, the Restart for begining a new");
+   PaveT1->AddText("explanations of important concepts for the algorithm.");
+   PaveT1->AddText("At the bottom you will find 5 buttons: the Start to");
+   PaveT1->AddText("begin the simulation, the Restart to reset for a new");
    PaveT1->AddText("simulation, the Close for exiting the program, and the");
-   PaveT1->AddText("next and previous buttons for navigate among the");
+   PaveT1->AddText("next and previous buttons to navigate among the");
    PaveT1->AddText("different steps of the algorithm.");
    PaveT1->AddText("");
    PaveT1->Draw();
@@ -233,9 +233,9 @@ MyMainFrame::MyMainFrame(const TGWindow *p,UInt_t w,UInt_t h) {
    pavecred->AddText(" FISINFOR research group");
    pavecred->AddText(" #font[62]{Julian A Salamanca B}, PHD ");
    pavecred->AddText(" FISINFOR research group director ");
-   pavecred->AddText(" SCIENCE AND EDUCATION FACULTY");
+   pavecred->AddText(" FACULTAD DE CIENCIAS Y EDUCACIÓN");
    pavecred->AddText(" Professor #font[72]{UNIVERSIDAD DISTRITAL}");
-   pavecred->AddText(" #font[72]{FRANCISCO JOSE DE CALDAS}");
+   pavecred->AddText(" #font[72]{FRANCISCO JOSÉ DE CALDAS}");
 
    pavecred->Draw();
 
@@ -279,6 +279,7 @@ void MyMainFrame::Restart(){
   t->SetTextSize(0.05);
   t->Draw();
   
+  
   TPaveText *Welcome = new TPaveText(0.01,0.59,0.99,0.93);
   Welcome->SetTextAlign(13);
   Welcome->SetTextFont(42);
@@ -287,56 +288,55 @@ void MyMainFrame::Restart(){
   Welcome->AddText("Welcome to the GQSA software of education, this is a Graphical User Interface (GUI) for the teaching and learning of Grover's Algorithm,");
   Welcome->AddText("in this GUI you will have a deep look into the algorithm getting to know in detail different information concerning the algorithm,");
   Welcome->AddText("including: the gates construction, the R value and definition; aswell you would find a simulation section, in which it is possible to");
-  Welcome->AddText(" visualize the algorithm step by step and watch the volution of the states.");
+  Welcome->AddText(" visualize the algorithm step by step and watch the evolution of the states.");
   Welcome->AddText("In the simulation the circuit, the steps of the algorithm and matrices of the gates, the geometric visualization, and the amplitude of");
-  Welcome->AddText("the states are shown. Being able to take an step by step look, and understand the progression and  changes in the algorithm as the");
+  Welcome->AddText("the states are shown. Being able to take a step by step look, and understand the progression and  changes in the algorithm as the");
   Welcome->AddText("parameters are changed.");
-  Welcome->AddText("We recommend to check first the basic concepts tab and then, for the simulation, to start with few amount of elements, and progresively");
+  Welcome->AddText("We recommend to check first the basic concepts tab and then, for the simulation, to start with few amount of elements, and progressively");
   Welcome->AddText("increase them in order to understand better the algorithm and the changes in it.");
   Welcome->AddText("");
   Welcome->Draw();
-
+   
   TPaveText *PaveInfo = new TPaveText(0.01,0.01,0.35,0.57);
-   PaveInfo->SetTextAlign(13);
-   PaveInfo->SetTextFont(42);
-   PaveInfo->SetFillColor(kBlue-10);
-   PaveInfo->SetTextSize(0.03);
-   PaveInfo->AddText("The Grover's algorithm is a quantum computing");
-   PaveInfo->AddText("algorithm analogous to the search of an");
-   PaveInfo->AddText("element in a disordered list, this algorithm");
-   PaveInfo->AddText("shows a better performance than a classic one,");
-   PaveInfo->AddText("where the avarage amount of iterations needed");
-   PaveInfo->AddText("is #alpha N. While Grover's algorithm finds the");
-   PaveInfo->AddText("element in #alpha#sqrt{N} iterations where N");
-   PaveInfo->AddText("is the total amount of elements in the list.");
-   PaveInfo->AddText("Grover's algortihm is one of the most mention");
-   PaveInfo->AddText("quantum algorithms in the literature.");
-   PaveInfo->AddText("");
-   PaveInfo->Draw(); 
-  
+  PaveInfo->SetTextAlign(13);
+  PaveInfo->SetTextFont(42);
+  PaveInfo->SetFillColor(kBlue-10);
+  PaveInfo->SetTextSize(0.03);
+  PaveInfo->AddText("The Grover's algorithm is a quantum computing");
+  PaveInfo->AddText("algorithm analogous to the search of an");
+  PaveInfo->AddText("element in a disordered list, this algorithm");
+  PaveInfo->AddText("shows a better performance than a classic one,");
+  PaveInfo->AddText("where the avarage amount of iterations needed");
+  PaveInfo->AddText("is #alpha N. While Grover's algorithm finds the");
+  PaveInfo->AddText("element in #alpha#sqrt{N} iterations where N");
+  PaveInfo->AddText("is the total amount of elements in the list.");
+  PaveInfo->AddText("Grover's algortihm is one of the most mentioned");
+  PaveInfo->AddText("quantum algorithms in the literature.");
+  PaveInfo->AddText("");
+  PaveInfo->Draw();
+
   TPaveText *PaveT1 = new TPaveText(0.36,0.01,0.715,0.57);
   PaveT1->SetTextAlign(13);
   PaveT1->SetTextFont(131);
   PaveT1->SetTextSize(0.03);
   PaveT1->SetTextColor(0);
   PaveT1->SetFillColor(kAzure+1);
-  PaveT1->AddText("On the left you will find two tabs, the first one for");
-  PaveT1->AddText("the simulation of the algorithm, this contains number");
-  PaveT1->AddText("entries, which you can interact with, these belong to");
-  PaveT1->AddText("the number of elements (N) to search and the search");
-  PaveT1->AddText("element, both of those can be changed as the user need,");
-  PaveT1->AddText("it below them, there is the R value and the number of");
-  PaveT1->AddText("qubits (n), these values will be update when the");
+  PaveT1->AddText("On the left you will find two tabs, one for the");
+  PaveT1->AddText("simulation of the algorithm, this contains numerical");
+  PaveT1->AddText("entries, which you can interact with, these are for");
+  PaveT1->AddText("the number of elements (N) and the search");
+  PaveT1->AddText("element, both of those can be changed as the user need");
+  PaveT1->AddText("it, below them, there is the R value and the number of");
+  PaveT1->AddText("qubits (n), these values will be updated when the");
   PaveT1->AddText("simulation begins. On the other tab you will find");
-  PaveT1->AddText("explanations of important concepts for the algorithm");
-  PaveT1->AddText("At the bottom you will find 5 buttons: the Start use to");
-  PaveT1->AddText("begin the simulation, the Restart for begining a new");
+  PaveT1->AddText("explanations of important concepts for the algorithm.");
+  PaveT1->AddText("At the bottom you will find 5 buttons: the Start to");
+  PaveT1->AddText("begin the simulation, the Restart to reset for a new");
   PaveT1->AddText("simulation, the Close for exiting the program, and the");
-  PaveT1->AddText("next and previous buttons for navigate among the");
+  PaveT1->AddText("next and previous buttons to navigate among the");
   PaveT1->AddText("different steps of the algorithm.");
   PaveT1->AddText("");
   PaveT1->Draw();
-  
   
   TPaveText *pavecred = new TPaveText(0.725,0.01,0.99,0.57);
   pavecred->SetTextAlign(10);
@@ -344,17 +344,17 @@ void MyMainFrame::Restart(){
   pavecred->SetTextColor(0);
   pavecred->SetTextSize(0.025);
   pavecred->SetFillColor(kBlue-6);
-  
+   
   pavecred->AddText(" ");
   pavecred->AddText(" Authors: ");
   pavecred->AddText(" #font[62]{Daniel M Martin R}");
   pavecred->AddText(" FISINFOR research group");
   pavecred->AddText(" #font[62]{Julian A Salamanca B}, PHD ");
   pavecred->AddText(" FISINFOR research group director ");
-  pavecred->AddText(" SCIENCE AND EDUCATION FACULTY");
+  pavecred->AddText(" FACULTAD DE CIENCIAS Y EDUCACIÓN");
   pavecred->AddText(" Professor #font[72]{UNIVERSIDAD DISTRITAL}");
-  pavecred->AddText(" #font[72]{FRANCISCO JOSE DE CALDAS}");
-  
+  pavecred->AddText(" #font[72]{FRANCISCO JOSÉ DE CALDAS}");
+
   pavecred->Draw();
   
   fCanvas->Update();
@@ -3760,7 +3760,7 @@ void MyMainFrame::GateConstruct(){
   oracle->Draw();
   latex->SetTextSize(0.06);
   latex->DrawLatex(0.02,0.8,"#font[11]{The oracle U_{f} #color[50]{implements a phase shift to}}");
-  latex->DrawLatex(0.02,0.75,"#font[11]{#color[50]{the state we are searching for}, lets call this}");
+  latex->DrawLatex(0.02,0.75,"#font[11]{#color[50]{the state we are searching for}, let's call this}");
   latex->DrawLatex(0.02,0.7,"#font[11]{state #color[4]{K}. In this context we can define:}");
   latex->DrawLatex(0.02,0.62,"#font[11]{U_{f}=(-1)^{f(x)} where f(x) is given by:}");
   latex->DrawLatex(0.3,0.48,"#font[11]{f(x)=}");
@@ -3772,19 +3772,19 @@ void MyMainFrame::GateConstruct(){
   latex->DrawLatex(0.02,0.35,"#font[11]{In a way that, when the operator (gate) is applied}");
   latex->DrawLatex(0.02,0.30,"#font[11]{to the given state, all states will remain the}");
   latex->DrawLatex(0.02,0.25,"#font[11]{same, #color[50]{except for the} #color[4]{K} #color[50]{state which will be}}");
-  latex->DrawLatex(0.02,0.2,"#font[11]{#color[50]{flipped to a negative phase}, diferenciating}");
+  latex->DrawLatex(0.02,0.2,"#font[11]{#color[50]{flipped to a negative phase}, differentiating}");
   latex->DrawLatex(0.02,0.15,"#font[11]{it from the rest.}");
 
   fCanvas->cd(2);
 
-  latex->DrawLatex(0.02,0.85,"#font[10]{Lets suppose the next superposition state:}");
+  latex->DrawLatex(0.02,0.85,"#font[10]{Let's suppose the next superposition state:}");
   latex->DrawLatex(0.02,0.75,"#font[11]{|#varphi#GT=#frac{1}{#sqrt{N}}(a|00#upoint#upoint#upoint 0#GT + b|00#upoint#upoint#upoint 1#GT + #upoint#upoint#upoint}");
   latex->DrawLatex(0.02,0.66,"#font[11]{+i|#color[4]{K}#GT + #upoint#upoint#upoint + v|11#upoint#upoint#upoint 1#GT)}");
   latex->DrawLatex(0.02,0.58,"#font[11]{Applying the U_{f} gate, to the state, gives as}");
    latex->DrawLatex(0.02,0.53,"#font[11]{a result:}");
   latex->DrawLatex(0.02,0.46,"#font[11]{(-1)^{f(x)}|#varphi#GT=#frac{1}{#sqrt{N}}(a|00#upoint#upoint#upoint 0#GT + b|00#upoint#upoint#upoint 1#GT +}");
   latex->DrawLatex(0.02,0.37,"#font[11]{#upoint#upoint#upoint #color[2]{-}i|#color[4]{K}#GT + #upoint#upoint#upoint + v|11#upoint#upoint#upoint 1#GT)}");
-  latex->DrawLatex(0.02,0.30, "#font[11]{The U_{f} gate can be written in the matrix form as:}");
+  latex->DrawLatex(0.02,0.30, "#font[11]{The gate can be written in the matrix form as:}");
   latex->DrawLatex(0.0,0.15,"#font[11]{U_{f}=}");
   latex->SetTextSize(0.33);
   latex->DrawLatex(0.105,0.11,"#font[132]{(}");
@@ -3804,12 +3804,12 @@ void MyMainFrame::GateConstruct(){
 
   fCanvas->cd(3);
 
-  latex->DrawLatex(0.02,0.85,"#font[10]{We can, aswell, see that #color[50]{the U_{f} operator}}");
+  latex->DrawLatex(0.02,0.85,"#font[10]{We can, as well, see that #color[50]{the U_{f} operator}}");
   latex->DrawLatex(0.02,0.78,"#font[10]{#color[50]{is equivalent} to the operation #color[51]{I-2|#color[4]{K}#GT#LT#color[4]{K}|}}");
   latex->DrawLatex(0.20,0.69,"#font[10]{#color[51]{(I-2|#color[4]{K}#GT#LT#color[4]{K}|)} |#varphi#GT=I|#varphi#GT-2|#color[4]{K}#GT#LT#color[4]{K}|#varphi#GT}");
   latex->DrawLatex(0.02,0.61,"#font[10]{where #LTk|#varphi#GT is #color[50]{the inside product}, which is}");
  latex->DrawLatex(0.02,0.56,"#font[10]{equal to 0 if #varphi#neq#color[4]{K} an 1 if #varphi=#color[4]{K}}");
- latex->DrawLatex(0.02,0.51,"#font[10]{Lets rewrite the |#varphi#GT state as |#phi#GT+|#color[4]{K}#GT}");
+ latex->DrawLatex(0.02,0.51,"#font[10]{Let's rewrite the |#varphi#GT state as |#phi#GT+|#color[4]{K}#GT}");
   latex->DrawLatex(0.20,0.42,"#font[10]{=I(|#phi#GT+|#color[4]{K}#GT)-2|#color[4]{K}#GT#LT#color[4]{K}|(|#phi#GT+|#color[4]{K}#GT)}");
   latex->DrawLatex(0.20,0.34,"#font[10]{=(|#phi#GT+|#color[4]{K}#GT)-2|#color[4]{K}#GT(#LT#color[4]{K}|#phi#GT+#LT#color[4]{K}|#color[4]{K}#GT)}");
   latex->DrawLatex(0.20,0.26,"#font[10]{=(|#phi#GT+|#color[4]{K}#GT)-2|#color[4]{K}#GT}");
@@ -3823,7 +3823,7 @@ void MyMainFrame::GateConstruct(){
   oracle->Draw();
   latex->SetTextSize(0.06);
   latex->DrawLatex(0.02,0.8,"#font[11]{The oracle U_{f} #color[50]{implements a phase shift to}}");
-  latex->DrawLatex(0.02,0.75,"#font[11]{#color[50]{the state we are searching for}, lets call this}");
+  latex->DrawLatex(0.02,0.75,"#font[11]{#color[50]{the state we are searching for}, let's call this}");
   latex->DrawLatex(0.02,0.7,"#font[11]{state #color[4]{K}. In this context we can define:}");
   latex->DrawLatex(0.02,0.62,"#font[11]{U_{f}=(-1)^{f(x)} where f(x) is given by:}");
   latex->DrawLatex(0.3,0.48,"#font[11]{f(x)=}");
@@ -3835,19 +3835,19 @@ void MyMainFrame::GateConstruct(){
   latex->DrawLatex(0.02,0.35,"#font[11]{In a way that, when the operator (gate) is applied}");
   latex->DrawLatex(0.02,0.30,"#font[11]{to the given state, all states will remain the}");
   latex->DrawLatex(0.02,0.25,"#font[11]{same, #color[50]{except for the} #color[4]{K} #color[50]{state which will be}}");
-  latex->DrawLatex(0.02,0.2,"#font[11]{#color[50]{flipped to a negative phase}, diferenciating}");
+  latex->DrawLatex(0.02,0.2,"#font[11]{#color[50]{flipped to a negative phase}, differentiating}");
   latex->DrawLatex(0.02,0.15,"#font[11]{it from the rest.}");
 
   gCanvas->cd(2);
 
-  latex->DrawLatex(0.02,0.85,"#font[10]{Lets suppose the next superposition state:}");
+  latex->DrawLatex(0.02,0.85,"#font[10]{Let's suppose the next superposition state:}");
   latex->DrawLatex(0.02,0.75,"#font[11]{|#varphi#GT=#frac{1}{#sqrt{N}}(a|00#upoint#upoint#upoint 0#GT + b|00#upoint#upoint#upoint 1#GT + #upoint#upoint#upoint}");
   latex->DrawLatex(0.02,0.66,"#font[11]{+i|#color[4]{K}#GT + #upoint#upoint#upoint + v|11#upoint#upoint#upoint 1#GT)}");
   latex->DrawLatex(0.02,0.58,"#font[11]{Applying the U_{f} gate, to the state, gives as}");
    latex->DrawLatex(0.02,0.53,"#font[11]{a result:}");
   latex->DrawLatex(0.02,0.46,"#font[11]{(-1)^{f(x)}|#varphi#GT=#frac{1}{#sqrt{N}}(a|00#upoint#upoint#upoint 0#GT + b|00#upoint#upoint#upoint 1#GT +}");
   latex->DrawLatex(0.02,0.37,"#font[11]{#upoint#upoint#upoint #color[2]{-}i|#color[4]{K}#GT + #upoint#upoint#upoint + v|11#upoint#upoint#upoint 1#GT)}");
-  latex->DrawLatex(0.02,0.30, "#font[11]{The U_{f} gate can be written in the matrix form as:}");
+  latex->DrawLatex(0.02,0.30, "#font[11]{The gate can be written in the matrix form as:}");
   latex->DrawLatex(0.0,0.15,"#font[11]{U_{f}=}");
   latex->SetTextSize(0.33);
   latex->DrawLatex(0.105,0.11,"#font[132]{(}");
@@ -3867,18 +3867,19 @@ void MyMainFrame::GateConstruct(){
 
   gCanvas->cd(3);
 
-  latex->DrawLatex(0.02,0.85,"#font[10]{We can, aswell, see that #color[50]{the U_{f} operator}}");
+  latex->DrawLatex(0.02,0.85,"#font[10]{We can, as well, see that #color[50]{the U_{f} operator}}");
   latex->DrawLatex(0.02,0.78,"#font[10]{#color[50]{is equivalent} to the operation #color[51]{I-2|#color[4]{K}#GT#LT#color[4]{K}|}}");
   latex->DrawLatex(0.20,0.69,"#font[10]{#color[51]{(I-2|#color[4]{K}#GT#LT#color[4]{K}|)} |#varphi#GT=I|#varphi#GT-2|#color[4]{K}#GT#LT#color[4]{K}|#varphi#GT}");
   latex->DrawLatex(0.02,0.61,"#font[10]{where #LTk|#varphi#GT is #color[50]{the inside product}, which is}");
  latex->DrawLatex(0.02,0.56,"#font[10]{equal to 0 if #varphi#neq#color[4]{K} an 1 if #varphi=#color[4]{K}}");
- latex->DrawLatex(0.02,0.51,"#font[10]{Lets rewrite the |#varphi#GT state as |#phi#GT+|#color[4]{K}#GT}");
+ latex->DrawLatex(0.02,0.51,"#font[10]{Let's rewrite the |#varphi#GT state as |#phi#GT+|#color[4]{K}#GT}");
   latex->DrawLatex(0.20,0.42,"#font[10]{=I(|#phi#GT+|#color[4]{K}#GT)-2|#color[4]{K}#GT#LT#color[4]{K}|(|#phi#GT+|#color[4]{K}#GT)}");
   latex->DrawLatex(0.20,0.34,"#font[10]{=(|#phi#GT+|#color[4]{K}#GT)-2|#color[4]{K}#GT(#LT#color[4]{K}|#phi#GT+#LT#color[4]{K}|#color[4]{K}#GT)}");
   latex->DrawLatex(0.20,0.26,"#font[10]{=(|#phi#GT+|#color[4]{K}#GT)-2|#color[4]{K}#GT}");
   latex->DrawLatex(0.20,0.18,"#font[10]{=|#phi#GT#color[2]{-}|#color[4]{K}#GT}");
   latex->DrawLatex(0.02,0.11,"#font[10]{We can see that the |#color[4]{K}#GT state sign was}");
   latex->DrawLatex(0.02,0.06,"#font[11]{flipped}");
+	
   gCanvas->Update();
   
 }
