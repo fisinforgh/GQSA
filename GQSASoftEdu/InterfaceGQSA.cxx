@@ -3769,11 +3769,11 @@ void MyMainFrame::GateConstruct(){
   latex->SetTextSize(0.06);
   latex->DrawLatex(0.45,0.50,"#font[11]{0 if x #neq #color[4]{K}}");
   latex->DrawLatex(0.43,0.45,"#font[11]{1 if x = #color[4]{K}}");
-  latex->DrawLatex(0.02,0.35,"#font[11]{In a way that, when the operator (gate) is applied}");
-  latex->DrawLatex(0.02,0.30,"#font[11]{to the given state, all states will remain the}");
-  latex->DrawLatex(0.02,0.25,"#font[11]{same, #color[50]{except for the} #color[4]{K} #color[50]{state which will be}}");
-  latex->DrawLatex(0.02,0.2,"#font[11]{#color[50]{flipped to a negative phase}, differentiating}");
-  latex->DrawLatex(0.02,0.15,"#font[11]{it from the rest.}");
+  latex->DrawLatex(0.02,0.35,"#font[11]{In a way that, when the operator (gate) is}");
+  latex->DrawLatex(0.02,0.30,"#font[11]{applied to the given state, all states will}");
+  latex->DrawLatex(0.02,0.25,"#font[11]{remain the same, #color[50]{except for the}}");
+  latex->DrawLatex(0.02,0.2,"#font[11]{#color[4]{K} #color[50]{state which will be} #color[50]{flipped to a}}");
+  latex->DrawLatex(0.02,0.15,"#font[11]{#color[50]{negative phase}, differentiating it from the rest.}");
 
   fCanvas->cd(2);
 
@@ -3832,11 +3832,11 @@ void MyMainFrame::GateConstruct(){
   latex->SetTextSize(0.06);
   latex->DrawLatex(0.45,0.50,"#font[11]{0 if x #neq #color[4]{K}}");
   latex->DrawLatex(0.43,0.45,"#font[11]{1 if x = #color[4]{K}}");
-  latex->DrawLatex(0.02,0.35,"#font[11]{In a way that, when the operator (gate) is applied}");
-  latex->DrawLatex(0.02,0.30,"#font[11]{to the given state, all states will remain the}");
-  latex->DrawLatex(0.02,0.25,"#font[11]{same, #color[50]{except for the} #color[4]{K} #color[50]{state which will be}}");
-  latex->DrawLatex(0.02,0.2,"#font[11]{#color[50]{flipped to a negative phase}, differentiating}");
-  latex->DrawLatex(0.02,0.15,"#font[11]{it from the rest.}");
+  latex->DrawLatex(0.02,0.35,"#font[11]{In a way that, when the operator (gate) is}");
+  latex->DrawLatex(0.02,0.30,"#font[11]{applied to the given state, all states will}");
+  latex->DrawLatex(0.02,0.25,"#font[11]{remain the same, #color[50]{except for the}}");
+  latex->DrawLatex(0.02,0.2,"#font[11]{#color[4]{K} #color[50]{state which will be} #color[50]{flipped to a}}");
+  latex->DrawLatex(0.02,0.15,"#font[11]{#color[50]{negative phase}, differentiating it from the rest.}");
 
   gCanvas->cd(2);
 
