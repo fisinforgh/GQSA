@@ -178,7 +178,7 @@ MyMainFrame::MyMainFrame(const TGWindow *p,UInt_t w,UInt_t h) {
    Welcome->AddText("");
    Welcome->Draw();
    
-   TPaveText *PaveInfo = new TPaveText(0.01,0.01,0.35,0.57);
+   TPaveText *PaveInfo = new TPaveText(0.01,0.01,0.353,0.57);
    PaveInfo->SetTextAlign(13);
    PaveInfo->SetTextFont(42);
    PaveInfo->SetFillColor(kBlue-10);
@@ -297,7 +297,7 @@ void MyMainFrame::Restart(){
   Welcome->AddText("");
   Welcome->Draw();
    
-  TPaveText *PaveInfo = new TPaveText(0.01,0.01,0.35,0.57);
+  TPaveText *PaveInfo = new TPaveText(0.01,0.01,0.353,0.57);
   PaveInfo->SetTextAlign(13);
   PaveInfo->SetTextFont(42);
   PaveInfo->SetFillColor(kBlue-10);
