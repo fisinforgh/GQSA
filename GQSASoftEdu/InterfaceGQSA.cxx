@@ -3773,7 +3773,8 @@ void MyMainFrame::GateConstruct(){
   latex->DrawLatex(0.02,0.30,"#font[11]{applied to the given state, all states will}");
   latex->DrawLatex(0.02,0.25,"#font[11]{remain the same, #color[50]{except for the}}");
   latex->DrawLatex(0.02,0.2,"#font[11]{#color[4]{K} #color[50]{state which will be} #color[50]{flipped to a}}");
-  latex->DrawLatex(0.02,0.15,"#font[11]{#color[50]{negative phase}, differentiating it from the rest.}");
+  latex->DrawLatex(0.02,0.15,"#font[11]{#color[50]{negative phase}, differentiating it}");
+  latex->DrawLatex(0.02,0.1,"#font[11]{from the rest.}");
 
   fCanvas->cd(2);
 
@@ -3836,7 +3837,8 @@ void MyMainFrame::GateConstruct(){
   latex->DrawLatex(0.02,0.30,"#font[11]{applied to the given state, all states will}");
   latex->DrawLatex(0.02,0.25,"#font[11]{remain the same, #color[50]{except for the}}");
   latex->DrawLatex(0.02,0.2,"#font[11]{#color[4]{K} #color[50]{state which will be} #color[50]{flipped to a}}");
-  latex->DrawLatex(0.02,0.15,"#font[11]{#color[50]{negative phase}, differentiating it from the rest.}");
+  latex->DrawLatex(0.02,0.15,"#font[11]{#color[50]{negative phase}, differentiating it}");
+  latex->DrawLatex(0.02,0.1,"#font[11]{from the rest.}");
 
   gCanvas->cd(2);
 
