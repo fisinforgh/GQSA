@@ -230,10 +230,12 @@ MyMainFrame::MyMainFrame(const TGWindow *p,UInt_t w,UInt_t h) {
    pavecred->AddText(" ");
    pavecred->AddText(" Authors: ");
    pavecred->AddText(" #font[62]{Daniel M Martin R}");
-   pavecred->AddText(" FISINFOR research group");
    pavecred->AddText(" #font[62]{Julian A Salamanca B}, PHD ");
-   pavecred->AddText(" FISINFOR research group director ");
-   pavecred->AddText(" FACULTAD DE CIENCIAS Y EDUCACIÓN");
+   pavecred->AddText(" #font[62]{Diego J Rodriguez P}, PHD ");
+   pavecred->AddText("--------------------------------------"); 
+   pavecred->AddText("Bachelor's Degree in Physics");
+   pavecred->AddText(" Research group FISINFOR ");
+   pavecred->AddText(" Faculty of Science and Education");
    pavecred->AddText(" Professor #font[72]{UNIVERSIDAD DISTRITAL}");
    pavecred->AddText(" #font[72]{FRANCISCO JOSÉ DE CALDAS}");
 
@@ -348,10 +350,12 @@ void MyMainFrame::Restart(){
   pavecred->AddText(" ");
   pavecred->AddText(" Authors: ");
   pavecred->AddText(" #font[62]{Daniel M Martin R}");
-  pavecred->AddText(" FISINFOR research group");
   pavecred->AddText(" #font[62]{Julian A Salamanca B}, PHD ");
-  pavecred->AddText(" FISINFOR research group director ");
-  pavecred->AddText(" FACULTAD DE CIENCIAS Y EDUCACIÓN");
+  pavecred->AddText(" #font[62]{Diego J Rodriguez P}, PHD ");
+  pavecred->AddText("--------------------------------------"); 
+  pavecred->AddText("Bachelor's Degree in Physics");
+  pavecred->AddText(" Research group FISINFOR ");
+  pavecred->AddText(" Faculty of Science and Education");
   pavecred->AddText(" Professor #font[72]{UNIVERSIDAD DISTRITAL}");
   pavecred->AddText(" #font[72]{FRANCISCO JOSÉ DE CALDAS}");
 
