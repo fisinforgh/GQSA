@@ -236,8 +236,8 @@ MyMainFrame::MyMainFrame(const TGWindow *p,UInt_t w,UInt_t h) {
    pavecred->AddText(" Bachelor's Degree in Physics");
    pavecred->AddText(" Research group FISINFOR ");
    pavecred->AddText(" Faculty of Science and Education");
-   pavecred->AddText(" Professor #font[72]{UNIVERSIDAD DISTRITAL}");
-   pavecred->AddText(" #font[72]{FRANCISCO JOSÉ DE CALDAS}");
+   pavecred->AddText(" #font[72]{UNIVERSIDAD DISTRITAL}");
+   pavecred->AddText(" #font[72]{FRANCISCO JOSE DE CALDAS}");
 
    pavecred->Draw();
 
@@ -356,8 +356,8 @@ void MyMainFrame::Restart(){
   pavecred->AddText(" Bachelor's Degree in Physics");
   pavecred->AddText(" Research group FISINFOR ");
   pavecred->AddText(" Faculty of Science and Education");
-  pavecred->AddText(" Professor #font[72]{UNIVERSIDAD DISTRITAL}");
-  pavecred->AddText(" #font[72]{FRANCISCO JOSÉ DE CALDAS}");
+  pavecred->AddText(" #font[72]{UNIVERSIDAD DISTRITAL}");
+  pavecred->AddText(" #font[72]{FRANCISCO JOSE DE CALDAS}");
 
   pavecred->Draw();
   
